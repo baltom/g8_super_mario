@@ -46,7 +46,7 @@ public class playerController : MonoBehaviour {
 	
 	//Sjekker om spilleren står på en bakke. Bakkesjekkeren er plassert under spilleren. To tomme gameobjects under spilleren sjekker om de overlapper gameobjects på lagmasken "ground".
 	//Bruker OverlapArea i stedet for linecast ettersom linecast kun sjekker et punkt og dermed vil returnere false om spilleren står helt ytterst på en kant.
-		grounded = Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position, 1 << LayerMask.NameToLayer("Ground"));	
+		grounded = Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position, 1 << LayerMask.NameToLayer("Ground")) || Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position, 1 << LayerMask.NameToLayer("Box"));	
 	
 	
 	//BUTTON JUMP

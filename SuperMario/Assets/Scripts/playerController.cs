@@ -14,14 +14,15 @@ public class playerController : MonoBehaviour {
 	private Transform groundCheckRight;
 
 	public float h;
-	public float jumpAccel;
+	public float jumpAccel = 20f;
 	public float moveForce = 10f;
 	public float airForce = 5f;
 	public float maxSpeed = 4f;
 	public float minSprint = 4f;
 	public float maxSprint = 7f;
-	public float jumpForce = 500f;	
+	public float jumpForce = 400f;	
 	public float adjuster = 0.5f;
+	public float temp;
 	
 	public Rigidbody2D Mario;
 	public BoxCollider2D groundCheck;
@@ -53,7 +54,7 @@ public class playerController : MonoBehaviour {
 			jump = true;
 			//Om bruker fortsetter å holde knappen inne vil Mario hoppe høyere.
 			jumpAccelerate = true;
-			jumpAccel = 20f;
+			temp = 0f;
 		}
 
 	//BUTTON UP JUMP. 
@@ -178,9 +179,10 @@ public class playerController : MonoBehaviour {
 
 		//HOPPAKSELERASJON
 		if (jumpAccelerate) {
-			Mario.AddForce(new Vector2(0f, Mario.velocity.y + jumpAccel));
-			jumpAccel -= adjuster;
-			if (jumpAccel == 0f)
+			Mario.AddForce(new Vector2(0f, jumpAccel));
+			Debug.Log (temp + " " + jumpAccelerate);
+			temp += 1 * Time.deltaTime;
+			if (temp >= 0.5f)
 				jumpAccelerate = false;
 		}
 	}

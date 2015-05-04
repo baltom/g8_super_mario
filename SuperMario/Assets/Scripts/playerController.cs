@@ -203,8 +203,8 @@ public class playerController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
-		if (coll.gameObject.tag == "Box") {
-			if (grounded = Physics2D.Linecast(transform.position, topCheck.position, 1 << LayerMask.NameToLayer("Box") ) ) {
+		if (coll.gameObject.layer == LayerMask.NameToLayer("Box")) {
+			if (Physics2D.Linecast(transform.position, topCheck.position, 1 << LayerMask.NameToLayer("Box") ) ) {
 				coll.gameObject.SendMessage ("Hit");
 				Debug.Log ("Player");
 			}

@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class coinBox : boxBehaviour {
-
-
-
+public class hiddenBox : boxBehaviour {
+	
 	public void Hit() {
 		Spawner (gameObject.tag);
-
 	}
 }

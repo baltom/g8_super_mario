@@ -10,22 +10,24 @@ public class playerController : MonoBehaviour {
 	private bool idle = true;
 	private bool turn = false;
 	private bool flip = false;
+
 	private Transform groundCheckLeft;
 	private Transform groundCheckRight;
+	private Transform topCheck;
 
+	public float counter = 0f;
 	public float h;
 	public float jumpAccel = 20f;
 	public float moveForce = 10f;
 	public float airForce = 5f;
-	public float maxSpeed = 4f;
-	public float minSprint = 4f;
-	public float maxSprint = 7f;
+	public float maxSpeed = 7f;
+	public float minSprint = 7f;
+	public float maxSprint = 10f;
 	public float jumpForce = 400f;	
 	public float adjuster = 0.5f;
 	public float temp;
 	
 	public Rigidbody2D Mario;
-	public BoxCollider2D groundCheck;
 
 	public Animator anim;
 
@@ -35,6 +37,7 @@ public class playerController : MonoBehaviour {
 		anim = GetComponent<Animator>();
 		groundCheckLeft = transform.Find ("groundCheckLeft");
 		groundCheckRight = transform.Find ("groundCheckRight");
+		topCheck = transform.Find ("topCheck");
 	//Initialiserer Rigidbody
 		Mario = GetComponent<Rigidbody2D>();
 
@@ -51,10 +54,12 @@ public class playerController : MonoBehaviour {
 	
 	//BUTTON JUMP
 		if (Input.GetButtonDown ("Jump") && grounded) {
+			Mario.drag = 0f;
 			jump = true;
 			//Om bruker fortsetter å holde knappen inne vil Mario hoppe høyere.
 			jumpAccelerate = true;
-			temp = 0f;
+			jumpAccel = 27f;
+
 		}
 
 	//BUTTON UP JUMP. 
@@ -74,7 +79,6 @@ public class playerController : MonoBehaviour {
 
 		//H = Brukerens input basert på hans keybinds i Unity. Følger horizontal-input. (0 = ingen input. 1 = Høyre. -1 = Venstre.)
 		h = Input.GetAxis("Horizontal");
-
 		//GROUNDED-BOOL. BRUKES AV NOEN AV ANIMASJONENE SOM PREMISSER
 		anim.SetBool("grounded", grounded);
 		//SNU-ANIMASJON
@@ -139,11 +143,11 @@ public class playerController : MonoBehaviour {
 			//Hvis ingen input inntreffer
 			if (h == 0f) {
 				//Hvis Mario har en større hastighet enn vanlig sprint-hastighet. Dette gjør at Mario sklir etter at man sprinter.
-				if (Mario.velocity.x > 4f || Mario.velocity.x < -4f)
-					Mario.drag = 1.3f;
+				if (Mario.velocity.x > 7f || Mario.velocity.x < -7f)
+					Mario.drag = 2f;
 				else 
 					//Ville heller lage egne koder for friksjon. Ettersom den innebygde friksjonen i Unity på materials gjorde at mario stoppet helt opp etter et hopp.
-					Mario.drag = 6f;
+					Mario.drag = 10f;
 				//Forteller animator at den skal spille av idle-animasjonen.
 				idle = true;
 			} else {
@@ -180,10 +184,10 @@ public class playerController : MonoBehaviour {
 		//HOPPAKSELERASJON
 		if (jumpAccelerate) {
 			Mario.AddForce(new Vector2(0f, jumpAccel));
-			Debug.Log (temp + " " + jumpAccelerate);
-			temp += 1 * Time.deltaTime;
-			if (temp >= 0.5f)
+			jumpAccel -= 1;
+			if (jumpAccel < 0f || Mario.velocity.y == 0f)
 				jumpAccelerate = false;
+
 		}
 	}
 
@@ -195,6 +199,16 @@ public class playerController : MonoBehaviour {
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;
+
 	}
 
+	void OnCollisionEnter2D(Collision2D coll) {
+		if (coll.gameObject.tag == "Box") {
+			if (grounded = Physics2D.Linecast(transform.position, topCheck.position, 1 << LayerMask.NameToLayer("Box") ) ) {
+				coll.gameObject.SendMessage ("Hit");
+				Debug.Log ("Player");
+			}
+		}
+		
+	}
 }

@@ -49,6 +49,8 @@
      <Compile Include="Assets\Enemies\Scripts\GoombaScript.cs" />
      <Compile Include="Assets\Enemies\Scripts\KoopaDeadScript.cs" />
      <Compile Include="Assets\Enemies\Scripts\KoopaScript.cs" />
+     <Compile Include="Assets\Scripts\boxBehaviour.cs" />
+     <Compile Include="Assets\Scripts\bricks.cs" />
      <Compile Include="Assets\Scripts\cameraMovement.cs" />
      <Compile Include="Assets\Scripts\playerController.cs" />
  <Reference Include="UnityEngine.UI">

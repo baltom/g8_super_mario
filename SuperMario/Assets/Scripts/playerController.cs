@@ -41,11 +41,9 @@ public class playerController : MonoBehaviour {
 		topCheck = transform.Find ("topCheck");
 	//Initialiserer Rigidbody
 		Mario = GetComponent<Rigidbody2D>();
-
-
 	}
-	
 
+	
 	void Update () {
 	
 	//Sjekker om spilleren står på en bakke. Bakkesjekkeren er plassert under spilleren. To tomme gameobjects under spilleren sjekker om de overlapper gameobjects på lagmasken "ground".

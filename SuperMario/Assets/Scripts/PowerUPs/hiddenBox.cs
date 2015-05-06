@@ -3,7 +3,7 @@ using System.Collections;
 
 public class hiddenBox : boxBehaviour {
 	
-	public void Hit() {
+	new void Hit() {
 		if (!exhausted) {
 			animate ();
 			BoxCollider2D boxColl = GetComponent<BoxCollider2D> ();

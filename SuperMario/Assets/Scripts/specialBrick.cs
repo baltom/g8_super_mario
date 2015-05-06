@@ -4,7 +4,7 @@ using System.Collections;
 public class specialBrick : boxBehaviour {
 
 		int counter;
-	void Hit () {
+	new void Hit () {
 
 		Debug.Log(counter);
 		if (!exhausted) {

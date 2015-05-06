@@ -23,7 +23,7 @@ public class GM : MonoBehaviour {
 		else if (instance != this)
 			Destroy (gameObject);
 
-		MarioClone = Instantiate (Mario, new Vector3(spawn, 1f, 0f), Quaternion.identity) as GameObject;
+		spawnMario(Mario, spawn, 1f);
 
 		Physics2D.IgnoreLayerCollision(11, 12,  true);
 	
@@ -35,10 +35,18 @@ public class GM : MonoBehaviour {
 	}
 
 	public void marioGrow() {
-		GameObject MarioCloneLarge;
-		MarioCloneLarge = Instantiate (MarioLarge, new Vector3(MarioClone.transform.position.x, MarioClone.transform.position.y, 0f), Quaternion.identity) as GameObject;
+		float x = MarioClone.transform.position.x;
+		float y = MarioClone.transform.position.y;
+
 		Destroy (MarioClone);
-		MainCamera.SendMessage ("findPlayer");
+
+		spawnMario(MarioLarge, x, y);
+
+		MainCamera.SendMessage ("invokePlayer");
+	}
+
+	public void spawnMario(GameObject MarioPrefab, float x, float y) {
+		MarioClone = Instantiate (MarioPrefab, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
 	}
 
 	public void addCoin(int value) {

@@ -31,6 +31,7 @@ public class cameraMovement : MonoBehaviour {
 	}
 
 	public void findPlayer() {
-		target = GameObject.FindGameObjectWithTag ("Player");
+		GameObject temp = GameObject.FindGameObjectWithTag ("Player");
+		target = temp;
 	}
 }

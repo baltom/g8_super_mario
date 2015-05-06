@@ -11,6 +11,8 @@ public class GM : MonoBehaviour {
 	public GameObject Mario;
 	public GameObject MarioLarge;
 
+	public Camera MainCamera;
+
 	private GameObject MarioClone;
 
 	public static GM instance = null;
@@ -36,6 +38,7 @@ public class GM : MonoBehaviour {
 		GameObject MarioCloneLarge;
 		MarioCloneLarge = Instantiate (MarioLarge, new Vector3(MarioClone.transform.position.x, MarioClone.transform.position.y, 0f), Quaternion.identity) as GameObject;
 		Destroy (MarioClone);
+		MainCamera.SendMessage ("findPlayer");
 	}
 
 	public void addCoin(int value) {

@@ -6,6 +6,7 @@ public class GM : MonoBehaviour {
 	private int lives;
 	private int time = 300;
 	private int score;
+	public float spawn = 155;
 
 	public GameObject Mario;
 	public GameObject MarioLarge;
@@ -20,7 +21,7 @@ public class GM : MonoBehaviour {
 		else if (instance != this)
 			Destroy (gameObject);
 
-		MarioClone = Instantiate (Mario, new Vector3(-12f, 1f, 0f), Quaternion.identity) as GameObject;
+		MarioClone = Instantiate (Mario, new Vector3(spawn, 1f, 0f), Quaternion.identity) as GameObject;
 
 		Physics2D.IgnoreLayerCollision(11, 12,  true);
 	

@@ -23,7 +23,8 @@ public class playerController : MonoBehaviour {
 	public float maxSpeed = 7f;
 	public float minSprint = 7f;
 	public float maxSprint = 10f;
-	public float jumpForce = 400f;	
+	public float jumpForce = 400f;
+	public float enemyBounce = 250f;	
 	public float adjuster = 0.5f;
 	public float temp;
 	
@@ -203,12 +204,20 @@ public class playerController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
-		if (coll.gameObject.layer == LayerMask.NameToLayer("Box")) {
-			if (Physics2D.Linecast(transform.position, topCheck.position, 1 << LayerMask.NameToLayer("Box") ) ) {
-				coll.gameObject.SendMessage ("Hit");
-				Debug.Log ("Player");
+		
+		if (coll.gameObject.tag == "Enemy"){
+			if (Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position, 1 << LayerMask.NameToLayer("Enemy"))){
+				coll.gameObject.SendMessage("death");
+				Mario.AddForce(new Vector2(Mario.velocity.x, enemyBounce));
 			}
+				
+			else 
+				takeDamage();
 		}
 		
+	}
+
+	void takeDamage(){
+		Debug.Log("DAMAGE");
 	}
 }

@@ -1,13 +1,16 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class boxBehaviour : MonoBehaviour {
 
-	private bool hit = false;
-	private bool exhausted = false;
+	public bool hit = false;
+	public bool exhausted = false;
+
+	private float x;
+	private float y;
 
 	public Sprite boxExhausted;
-	public Transform mushroom;
+	public Transform contents;
 
 	private Animator anim;
 	public SpriteRenderer sr;
@@ -15,71 +18,43 @@ public class boxBehaviour : MonoBehaviour {
 	private GameObject lifeShroom;
 	
 	void Awake(){
+		setXY(0f, 1f);
 		anim = GetComponent<Animator>();
 		sr = GetComponent<SpriteRenderer> ();
 	}
 
-	public void Animate() {
-		anim.SetTrigger ("Hit");
-	}
-
-	public void Spawner(string tag) {
+	public void Hit () {
 		if (!exhausted) {
-			Animate ();
-
-			if (tag == "boxCoin")
-				boxCoin ();
-			else if (tag == "boxMush")
-				boxMush ();
-			else if (tag == "boxLife")
-				boxLife ();
-			else if (tag == "boxHidden")
-				boxHidden();
+			animate();
+			timedSpawn(0.5f);
+			exhaust();
 		}
 	}
 
-	public void Destroy () {
+	public void timedSpawn (float timer) {
+		Invoke ("spawn", timer);
+	}
+
+	public void setXY(float x, float y){
+		this.x = x;
+		this.y = y;
+	}
+
+	public void animate() {
+		anim.SetTrigger ("Hit");
+	}
+
+	public void destroy () {
 		Destroy (gameObject);
-	}
-
-	public void boxHidden(){
-		BoxCollider2D boxColl = GetComponent<BoxCollider2D>();
-		boxColl.enabled = true;
-		boxMush ();
-	}
-
-	public void boxCoin() {
-		spawnCoin ();
-		exhaust();
-	}
-
-	public void boxLife() {
-		
-	}
-
-	public void boxMush() {
-		Invoke("spawnMushroom", 0.5f);
-		exhaust ();
 	}
 
 	public void exhaust() {
 		sr.sprite = boxExhausted;
 		exhausted = true;
 	}
-
-	public void spawnCoin() {
 	
-	}
-
-	public void spawnMushroom() {
-
-		if (tag == "boxMush")
-			Instantiate (mushroom, new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y + 1f, 0f), Quaternion.identity);
-		else {
-
-			lifeShroom = Instantiate (mushroom.gameObject, new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y + 1f, 0f), Quaternion.identity) as GameObject;
-			lifeShroom.gameObject.SendMessage ("spriteChange");
-		}
+	public void spawn() {
+			Instantiate (contents, new Vector3 (gameObject.transform.position.x + x, gameObject.transform.position.y + y, 0f), Quaternion.identity);
 	}
 
 

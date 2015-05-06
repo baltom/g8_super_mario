@@ -49,13 +49,18 @@
      <Compile Include="Assets\Enemies\Scripts\GoombaScript.cs" />
      <Compile Include="Assets\Enemies\Scripts\KoopaDeadScript.cs" />
      <Compile Include="Assets\Enemies\Scripts\KoopaScript.cs" />
+     <Compile Include="Assets\Scripts\GM.cs" />
+     <Compile Include="Assets\Scripts\PowerUPs\coinBox.cs" />
+     <Compile Include="Assets\Scripts\PowerUPs\hiddenBox.cs" />
+     <Compile Include="Assets\Scripts\PowerUPs\mushroom.cs" />
+     <Compile Include="Assets\Scripts\PowerUPs\powerUp.cs" />
      <Compile Include="Assets\Scripts\boxBehaviour.cs" />
      <Compile Include="Assets\Scripts\bricks.cs" />
      <Compile Include="Assets\Scripts\cameraMovement.cs" />
-     <Compile Include="Assets\Scripts\coinBox.cs" />
-     <Compile Include="Assets\Scripts\hiddenBox.cs" />
      <Compile Include="Assets\Scripts\playerController.cs" />
-     <Compile Include="Assets\Scripts\powerUp.cs" />
+     <Compile Include="Assets\Scripts\playerFinish.cs" />
+     <Compile Include="Assets\Scripts\playerTopCollision.cs" />
+     <Compile Include="Assets\Scripts\specialBrick.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

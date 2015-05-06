@@ -4,7 +4,7 @@ using System.Collections;
 public class bricks : boxBehaviour {
 
 	public void Hit  () {
-		Animate ();
+		animate ();
 	}
 
 }

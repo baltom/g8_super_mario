@@ -29,15 +29,6 @@ public class GoombaScript : MonoBehaviour {
             Component.Destroy(transform.GetComponent<BoxCollider2D>());
             dead = true;
         }
-        Vector2 rayPosUp = new Vector2(pos.x, pos.y + 0.08f);
-        RaycastHit2D hitUp = Physics2D.Raycast(rayPos, Vector2.up, 0.01f);
-        if (hitUp.collider != null && hitUp.transform.gameObject.tag.Equals("Player") || Input.GetKey(KeyCode.Space)) {
-            GameObject deadArt = transform.Find("dead").gameObject;
-            deadArt.SetActive(true);
-            deadArt.transform.SetParent(null);
-            GameObject.Destroy(this.gameObject);
-            GameObject.Destroy(deadArt, 2);
-        }
 	}
 
     private void toggleDirection() {
@@ -52,5 +43,13 @@ public class GoombaScript : MonoBehaviour {
         if (collision.gameObject.tag.Equals("Player")) {
             //player.die;
         }
+    }
+
+    void death(){
+            GameObject deadArt = transform.Find("dead").gameObject;
+            deadArt.SetActive(true);
+            deadArt.transform.SetParent(null);
+            GameObject.Destroy(this.gameObject);
+            GameObject.Destroy(deadArt, 2);
     }
 }

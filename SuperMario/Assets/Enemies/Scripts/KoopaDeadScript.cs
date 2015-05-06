@@ -14,7 +14,7 @@ public class KoopaDeadScript : MonoBehaviour {
 	void Update () {
 	    if (shot) {
             Vector2 pos = new Vector2(transform.position.x, transform.position.y);
-            transform.position = Vector2.MoveTowards(transform.position, pos + (dir * 0.1f), Time.deltaTime * 2);
+            transform.position = Vector2.MoveTowards(transform.position, pos + (dir * 10f), Time.deltaTime * 10);
             Vector2 rayPos = new Vector2(transform.position.x + (dir.x * 0.51f), transform.position.y - 0.4f);
             RaycastHit2D hit = Physics2D.Raycast(rayPos, dir, 0.01f);
             if (hit.transform != null && !hit.transform.gameObject.tag.Equals("Enemy")) {
@@ -40,7 +40,7 @@ public class KoopaDeadScript : MonoBehaviour {
             if (collision.transform.position.x > transform.position.x) {
                 dir = -Vector2.right;
             } else {
-                dir = -Vector2.right;
+                dir = Vector2.right;
             }
         }
         shot = true;

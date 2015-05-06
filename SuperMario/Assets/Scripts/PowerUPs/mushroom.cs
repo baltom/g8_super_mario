@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class mushroom : powerUp {
+public class mushroom : MonoBehaviour {
 	public bool lifeShroom;
 
 	private bool sideHit;
@@ -9,6 +9,7 @@ public class mushroom : powerUp {
 	private Transform sideCheck;
 	private float speed;
 	private float dir;
+	public int value;
 
 	void Awake() {
 		speed = 1.5f;
@@ -35,15 +36,7 @@ public class mushroom : powerUp {
 	}
 
 	public void move() {
-		//pwrUP.AddForce(new Vector2(speed, 0f));
 		active = true;
-	}
-
-	void OnCollisionEnter2D(Collision2D coll) {
-		if (coll.gameObject.tag == "Player"){
-			Destroy (gameObject);
-			coll.gameObject.SendMessage ("mushroom", value);
-		}
 	}
 
 

@@ -4,7 +4,11 @@ using System.Collections;
 public class bricks : boxBehaviour {
 
 	new void Hit  () {
-		animate ();
+		if(!GM.instance.checkBig())
+			animate ();
+		else {
+			Destroy(gameObject);
+		}
 	}
 
 }

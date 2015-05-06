@@ -13,7 +13,6 @@ public class playerController : MonoBehaviour {
 
 	private Transform groundCheckLeft;
 	private Transform groundCheckRight;
-	private Transform topCheck;
 
 	public float counter = 0f;
 	public float h;
@@ -38,7 +37,6 @@ public class playerController : MonoBehaviour {
 		anim = GetComponent<Animator>();
 		groundCheckLeft = transform.Find ("groundCheckLeft");
 		groundCheckRight = transform.Find ("groundCheckRight");
-		topCheck = transform.Find ("topCheck");
 	//Initialiserer Rigidbody
 		Mario = GetComponent<Rigidbody2D>();
 	}
@@ -207,15 +205,15 @@ public class playerController : MonoBehaviour {
 			if (Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position, 1 << LayerMask.NameToLayer("Enemy"))){
 				coll.gameObject.SendMessage("death");
 				Mario.AddForce(new Vector2(Mario.velocity.x, enemyBounce));
+			} else {
+				GM.instance.subtractLives();
+				SendMessage("death");
 			}
-				
-			else 
-				takeDamage();
+		} else if (coll.gameObject.tag == "pit"){
+			GM.instance.subtractLives();
+			SendMessage("death");
 		}
 		
 	}
 
-	void takeDamage(){
-		Debug.Log("DAMAGE");
-	}
 }

@@ -3,21 +3,25 @@ using System.Collections;
 
 public class GM : MonoBehaviour {
 
-	private int lives;
-	private int time = 300;
+	bool big = false;
+	bool dead = false;
+
+	private int lives = 3;
+	private int time;
 	private int score;
 	public float spawn = 155;
 
 	public GameObject Mario;
 	public GameObject MarioLarge;
 
-	public Camera MainCamera;
-
 	private GameObject MarioClone;
 
 	public static GM instance = null;
 
 	void Awake() {
+		time = 400;
+		score = 0;
+		Debug.Log("TEST");
 		if (instance == null)
 			instance = this;
 		else if (instance != this)
@@ -25,24 +29,41 @@ public class GM : MonoBehaviour {
 
 		spawnMario(Mario, spawn, 1f);
 
+		//Fiende og powerups
 		Physics2D.IgnoreLayerCollision(11, 12,  true);
+
+		//Fiende og kamera
+		Physics2D.IgnoreLayerCollision(11, 14,  true);
+
+		//Kamera og powerups
+		Physics2D.IgnoreLayerCollision(14, 12,  true);
+
+		//Spiller og powerups. Bruker trigger. Hindrer at powerups bremser opp spillerobjektet.
+		Physics2D.IgnoreLayerCollision(15, 12,  true);
+
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		time -= 1;
+
 	}
 
 	public void marioGrow() {
+		Debug.Log("GROW");
 		float x = MarioClone.transform.position.x;
 		float y = MarioClone.transform.position.y;
 
 		Destroy (MarioClone);
 
-		spawnMario(MarioLarge, x, y);
+		spawnMario(MarioLarge, x, y + 0.5f);
 
-		MainCamera.SendMessage ("invokePlayer");
+		big = true;
+	}
+
+	public bool checkBig() {
+		return big;
 	}
 
 	public void spawnMario(GameObject MarioPrefab, float x, float y) {
@@ -62,15 +83,19 @@ public class GM : MonoBehaviour {
 	}
 
 	public void subtractLives() {
-		if (deathCheck ()) 
+		Debug.Log(lives);
+		if (deathCheck ()) {
+			Debug.Log("GAME OVER");
+			MarioClone.SendMessage("gameOver");
 			gameOver ();
-		else
+		} else {
+			Debug.Log("LIFE DOWN");
 			lives -= 1;
-		restart ();
+			Invoke("restart", 3f);
+		}
 	}
 
 	public bool deathCheck() {
-		bool dead = new bool ();
 
 		if (lives == 0)
 			dead = true;
@@ -79,7 +104,8 @@ public class GM : MonoBehaviour {
 	}
 
 	public void restart() {
-		
+		Debug.Log("RESTART");
+		Application.LoadLevel(Application.loadedLevel);
 	}
 
 	public void gameOver() {

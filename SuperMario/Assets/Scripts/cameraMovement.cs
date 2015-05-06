@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class cameraMovement : MonoBehaviour { 
-	private bool finish;
+	private bool finish = false;
 	public GameObject target;
 	public GameObject temp;
 	public float xOffset = 3f;
@@ -34,9 +34,5 @@ public class cameraMovement : MonoBehaviour {
 	public void findPlayer() {
 		Debug.Log("PLAYER");
 		target = GameObject.FindWithTag("Player");
-	}
-
-	public void invokePlayer() {
-		
 	}
 }

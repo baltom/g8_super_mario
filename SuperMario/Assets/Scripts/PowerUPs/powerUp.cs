@@ -7,16 +7,9 @@ public class powerUp : MonoBehaviour {
 	
 	public int value;
 
-
-	/*public void spriteChange(Sprite newSprite) {
-		sr.sprite = newSprite;
-	}*/
-
-
-
-	void OnCollisionEnter2D(Collision2D coll) {
+	void OnTriggerEnter2D(Collider2D coll) {
 		if (coll.gameObject.tag == "Player"){
-			Destroy (gameObject);
+			Destroy (transform.parent.gameObject);
 			GM.instance.addCoin(value);
 		}
 	}

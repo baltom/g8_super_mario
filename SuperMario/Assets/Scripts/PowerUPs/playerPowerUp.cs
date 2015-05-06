@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class playerPowerUp : MonoBehaviour {
-	bool playerLarge;
+	bool playerLarge = false;
 
 	public void mushroom (int value) {
 		if (value < 1000) 

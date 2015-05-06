@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\PowerUPs\coinBox.cs" />
      <Compile Include="Assets\Scripts\PowerUPs\hiddenBox.cs" />
      <Compile Include="Assets\Scripts\PowerUPs\mushroom.cs" />
+     <Compile Include="Assets\Scripts\PowerUPs\mushroomCollision.cs" />
      <Compile Include="Assets\Scripts\PowerUPs\playerPowerUp.cs" />
      <Compile Include="Assets\Scripts\PowerUPs\powerUp.cs" />
      <Compile Include="Assets\Scripts\boxBehaviour.cs" />
@@ -60,6 +61,7 @@
      <Compile Include="Assets\Scripts\cameraMovement.cs" />
      <Compile Include="Assets\Scripts\marioLargeStart.cs" />
      <Compile Include="Assets\Scripts\playerController.cs" />
+     <Compile Include="Assets\Scripts\playerDeath.cs" />
      <Compile Include="Assets\Scripts\playerFinish.cs" />
      <Compile Include="Assets\Scripts\playerTopCollision.cs" />
      <Compile Include="Assets\Scripts\specialBrick.cs" />

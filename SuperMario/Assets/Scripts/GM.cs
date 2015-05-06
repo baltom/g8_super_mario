@@ -7,15 +7,20 @@ public class GM : MonoBehaviour {
 	private int time = 300;
 	private int score;
 
-	public static GM instance = null;
-
 	public GameObject Mario;
+	public GameObject MarioLarge;
+
+	private GameObject MarioClone;
+
+	public static GM instance = null;
 
 	void Awake() {
 		if (instance == null)
 			instance = this;
 		else if (instance != this)
 			Destroy (gameObject);
+
+		MarioClone = Instantiate (Mario, new Vector3(-12f, 1f, 0f), Quaternion.identity) as GameObject;
 
 		Physics2D.IgnoreLayerCollision(11, 12,  true);
 	
@@ -26,15 +31,47 @@ public class GM : MonoBehaviour {
 		time -= 1;
 	}
 
-	public void powerUpManager (int life) {
-		if (life == 1 || life == -1) {
-			lives += life;
-			Debug.Log(lives);
-		} else if (life == 2)
-			Debug.Log("Mario GROW!");
-		else 
-			Debug.Log("FlowerPower");
+	public void marioGrow() {
+		GameObject MarioCloneLarge;
+		MarioCloneLarge = Instantiate (MarioLarge, new Vector3(MarioClone.transform.position.x, MarioClone.transform.position.y, 0f), Quaternion.identity) as GameObject;
+		Destroy (MarioClone);
+	}
 
+	public void addCoin(int value) {
+		addScore (value);
+	}
+
+	public void addScore(int value) {
+		score += value;
+	}
+
+	public void addLives(){
+		lives += 1;
+	}
+
+	public void subtractLives() {
+		if (deathCheck ()) 
+			gameOver ();
+		else
+			lives -= 1;
+		restart ();
+	}
+
+	public bool deathCheck() {
+		bool dead = new bool ();
+
+		if (lives == 0)
+			dead = true;
+
+		return dead;
+	}
+
+	public void restart() {
 		
 	}
+
+	public void gameOver() {
+	
+	}
+
 }

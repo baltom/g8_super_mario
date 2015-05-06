@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class mushroom : powerUp {
+	public bool lifeShroom;
 
 	private bool sideHit;
 	private bool active = false;
@@ -40,5 +41,13 @@ public class mushroom : powerUp {
 		//pwrUP.AddForce(new Vector2(speed, 0f));
 		active = true;
 	}
+
+	void OnCollisionEnter2D(Collision2D coll) {
+		if (coll.gameObject.tag == "Player"){
+			Destroy (gameObject);
+			coll.gameObject.SendMessage ("mushroom", value);
+		}
+	}
+
 
 }

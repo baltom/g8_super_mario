@@ -11,11 +11,10 @@ public class cameraMovement : MonoBehaviour {
 
 
 	void Awake () {
-		target = GameObject.FindGameObjectWithTag ("Player");
 	}
 
 	void Update() {
-
+		target = GameObject.FindGameObjectWithTag ("Player");
 		h = Input.GetAxis ("Horizontal");
 		if (target.transform.position.x > transform.position.x - xOffset)
 			transform.position = new Vector3 (target.transform.position.x + xOffset,

@@ -5,7 +5,7 @@ public class powerUp : MonoBehaviour {
 	
 	private bool playerHit;
 	
-	public int powerType;
+	public int value;
 
 
 	/*public void spriteChange(Sprite newSprite) {
@@ -17,8 +17,7 @@ public class powerUp : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D coll) {
 		if (coll.gameObject.tag == "Player"){
 			Destroy (gameObject);
-			coll.gameObject.SendMessage("PlayerHit");
-			GM.instance.powerUpManager(powerType);
+			GM.instance.addCoin(value);
 		}
 	}
 }

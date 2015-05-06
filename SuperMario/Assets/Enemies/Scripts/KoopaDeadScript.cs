@@ -15,7 +15,7 @@ public class KoopaDeadScript : MonoBehaviour {
 	    if (shot) {
             Vector2 pos = new Vector2(transform.position.x, transform.position.y);
             transform.position = Vector2.MoveTowards(transform.position, pos + (dir * 0.1f), Time.deltaTime * 2);
-            Vector2 rayPos = new Vector2(transform.position.x + (dir.x * 0.08f), transform.position.y - 0.04f);
+            Vector2 rayPos = new Vector2(transform.position.x + (dir.x * 0.51f), transform.position.y - 0.4f);
             RaycastHit2D hit = Physics2D.Raycast(rayPos, dir, 0.01f);
             if (hit.transform != null && !hit.transform.gameObject.tag.Equals("Enemy")) {
                 toggleDirection();

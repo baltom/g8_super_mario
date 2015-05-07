@@ -9,14 +9,13 @@ public class GM : MonoBehaviour {
 	private int lives = 3;
 	private int time;
 	private int score;
-<<<<<<< HEAD
 
 	private float x;
 	private float y;
 
-=======
+
 	private int coins;
->>>>>>> origin/master
+//>>>>>>> origin/master
 	public float spawn = 155;
 
 	public GameObject Mario;
@@ -32,7 +31,7 @@ public class GM : MonoBehaviour {
 		time = 400;
 		score = 0;
 		coins = 0;
-		Debug.Log("TEST");
+
 		if (instance == null)
 			instance = this;
 		else if (instance != this)
@@ -70,14 +69,15 @@ public class GM : MonoBehaviour {
 
 	public void marioGrow() {
 		Debug.Log("GROW");
-		
+		destroyClone();
 		spawnMario(MarioLarge, x, y + 0.5f);
-
 		big = true;
 	}
 
 	public void powerDown() {
-
+		big = false;
+		destroyClone();
+		spawnMario(Mario, x, y);
 	}
 
 	public bool checkBig() {
@@ -92,11 +92,12 @@ public class GM : MonoBehaviour {
 
 	public float getX(){
 		x = MarioClone.transform.position.x;
+
 		return x;
 	}
 
 	public float getY(){
-		x = MarioClone.transform.position.x;
+		y = MarioClone.transform.position.y;
 		return y;
 	}
 

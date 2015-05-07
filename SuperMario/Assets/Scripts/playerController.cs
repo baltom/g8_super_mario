@@ -91,36 +91,21 @@ public class playerController : MonoBehaviour {
 			//Flippe spilleren når han/hun står mot venstre
 			if (h > 0 && !facingRight) {
 				Flip ();
-				flip = true;
+				
 			
 			//Flippe spilleren om han/hun står mot høyre.
 			} else if (h < 0 && facingRight) {
-				// ... flip the player.
 				Flip ();
-				flip = true;
 			}
 
 			//SNU-ANIMASJON
-			//Hvis det forekommer en flip, altså at spilleren snur seg.
-			if (flip) {
-				//Og mario beveger seg i en hastighet over 1f på x-aksen. Dette hindrer at man spiller av snu-animasjonen når mario står helt i ro.
-				if (Mario.velocity.x > 1f || Mario.velocity.x < -1f)
-					//Sett turn til det motsatte av det den var før. Dette er for å forhindre en bug der man satt fast i snu animasjonen om man snudde to ganger etter hverandre.
-					turn = !turn;
-				//Flip blir false ettersom flipen er nå over.
-				flip = false;
-
-			//Hvis flip er ferdig, men snuanimasjonen fortsatt er i gang.
-			} else if (!flip && turn) {
-
-				//For å beholde snu-animasjonen helt til mario er ferdig med å skli.
-				if (Mario.velocity.x > 1f || Mario.velocity.x < -1f)
-					turn = true;
-
-				//Hvis hastigheten er under 1f er snuanimasjonen ferdig.
-				else {
-					turn = false;
-				}
+			//Hvis Mario peker en annen retning enn den retningen han har fart i så spilles snu-animasjonen av.
+			if (Mario.velocity.x > 1f && !facingRight) {
+				turn = true;
+			} else if (Mario.velocity.x < -1f && facingRight) {
+				turn = true;
+			} else {
+				turn = false;
 			}
 
 			//SPRINT

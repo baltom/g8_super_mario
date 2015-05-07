@@ -16,7 +16,7 @@ public class cameraMovement : MonoBehaviour {
 		if (target == null) {
 			findPlayer();
 		}
-		if (!finish) {
+		if (!finish && target != null) {
 			
 			h = Input.GetAxis ("Horizontal");
 			if (target.transform.position.x > transform.position.x - xOffset)
@@ -32,7 +32,6 @@ public class cameraMovement : MonoBehaviour {
 	}
 
 	public void findPlayer() {
-		Debug.Log("PLAYER");
 		target = GameObject.FindWithTag("Player");
 	}
 }

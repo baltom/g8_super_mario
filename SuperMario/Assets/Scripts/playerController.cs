@@ -11,8 +11,9 @@ public class playerController : MonoBehaviour {
 	private bool turn = false;
 	private bool flip = false;
 
-	private Transform groundCheckLeft;
-	private Transform groundCheckRight;
+	public Transform groundCheckLeft;
+	public Transform groundCheckRight;
+	public Transform topCheck;
 
 	public float counter = 0f;
 	public float h;
@@ -22,8 +23,7 @@ public class playerController : MonoBehaviour {
 	public float maxSpeed = 7f;
 	public float minSprint = 7f;
 	public float maxSprint = 10f;
-	public float jumpForce = 400f;
-	public float enemyBounce = 250f;	
+	public float jumpForce = 400f;	
 	public float adjuster = 0.5f;
 	public float temp;
 	
@@ -36,7 +36,8 @@ public class playerController : MonoBehaviour {
 	//Finner bakkesjekkeren. Empty gameObject.
 		anim = GetComponent<Animator>();
 		groundCheckLeft = transform.Find ("groundCheckLeft");
-		groundCheckRight = transform.Find ("groundCheckRight");
+		groundCheckRight = transform.Find ("groundCheckRight");	
+
 	//Initialiserer Rigidbody
 		Mario = GetComponent<Rigidbody2D>();
 	}
@@ -199,21 +200,5 @@ public class playerController : MonoBehaviour {
 
 	}
 
-	void OnCollisionEnter2D(Collision2D coll) {
-		
-		if (coll.gameObject.tag == "Enemy"){
-			if (Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position, 1 << LayerMask.NameToLayer("Enemy"))){
-				coll.gameObject.SendMessage("death");
-				Mario.AddForce(new Vector2(Mario.velocity.x, enemyBounce));
-			} else {
-				GM.instance.subtractLives();
-				SendMessage("death");
-			}
-		} else if (coll.gameObject.tag == "pit"){
-			GM.instance.subtractLives();
-			SendMessage("death");
-		}
-		
-	}
 
 }

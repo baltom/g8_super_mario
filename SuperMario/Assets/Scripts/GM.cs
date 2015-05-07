@@ -9,6 +9,10 @@ public class GM : MonoBehaviour {
 	private int lives = 3;
 	private int time;
 	private int score;
+
+	private float x;
+	private float y;
+
 	public float spawn = 155;
 
 	public GameObject Mario;
@@ -52,18 +56,34 @@ public class GM : MonoBehaviour {
 
 	public void marioGrow() {
 		Debug.Log("GROW");
-		float x = MarioClone.transform.position.x;
-		float y = MarioClone.transform.position.y;
-
-		Destroy (MarioClone);
-
+		
 		spawnMario(MarioLarge, x, y + 0.5f);
 
 		big = true;
 	}
 
+	public void powerDown() {
+
+	}
+
 	public bool checkBig() {
 		return big;
+	}
+
+	public void destroyClone(){
+		x = getX();
+		y = getY();
+		Destroy (MarioClone);
+	}
+
+	public float getX(){
+		x = MarioClone.transform.position.x;
+		return x;
+	}
+
+	public float getY(){
+		x = MarioClone.transform.position.x;
+		return y;
 	}
 
 	public void spawnMario(GameObject MarioPrefab, float x, float y) {

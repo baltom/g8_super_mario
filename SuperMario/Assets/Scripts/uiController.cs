@@ -3,11 +3,11 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class uiController : MonoBehaviour {
-
+	
 	private Text scoreText;
 	private Text timeText;
 	private Text coinText;
-
+	
 	// Use this for initialization
 	void Start () {
 		GameObject scTemp = GameObject.FindGameObjectWithTag("ui_score");
@@ -18,24 +18,36 @@ public class uiController : MonoBehaviour {
 		coinText = coTemp.GetComponent<Text> ();
 	}
 	
-	public void increaseScore(int score) {
-		int currentScore;
-		int.TryParse (scoreText.text, out currentScore);
-		currentScore += score;
-		scoreText.text = currentScore + "";
+	//Legger til ekstra 0'er forran en string
+	private string formatString(string input, int length) {
+		string returnString = "";
+		for (int i = 0; i < length-input.Length; i++) {
+			returnString += "0";
+		}
+		return returnString + input;
 	}
-
-	public void increaseCoin() {
-		int currentCoin;
-		int.TryParse (coinText.text, out currentCoin);
-		currentCoin++;
-		coinText.text = currentCoin + "";
+	
+	private void setTimeText(string time) {
+		timeText.text = formatString (time, 3);
 	}
-
-	public void decreaseTime() {
-		int currentTime;
-		int.TryParse (timeText.text, out currentTime);
-		currentTime--;
-		timeText.text = currentTime + "";
+	
+	private void setScoreText(string score) {
+		scoreText.text = formatString (score, 6);
+	}
+	
+	private void setCoinText(string coin) {
+		coinText.text = formatString (coin, 2);
+	}
+	
+	public void setTime(int time) {
+		setTimeText(time + "");
+	}
+	
+	public void setCoins(int coins) {
+		setCoinText(coins + "");
+	}
+	
+	public void setScore(int score) {
+		setScoreText(score + "");
 	}
 }

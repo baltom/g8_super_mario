@@ -9,10 +9,14 @@ public class GM : MonoBehaviour {
 	private int lives = 3;
 	private int time;
 	private int score;
+<<<<<<< HEAD
 
 	private float x;
 	private float y;
 
+=======
+	private int coins;
+>>>>>>> origin/master
 	public float spawn = 155;
 
 	public GameObject Mario;
@@ -22,9 +26,12 @@ public class GM : MonoBehaviour {
 
 	public static GM instance = null;
 
+	private uiController ui;
+
 	void Awake() {
 		time = 400;
 		score = 0;
+		coins = 0;
 		Debug.Log("TEST");
 		if (instance == null)
 			instance = this;
@@ -45,13 +52,20 @@ public class GM : MonoBehaviour {
 		//Spiller og powerups. Bruker trigger. Hindrer at powerups bremser opp spillerobjektet.
 		Physics2D.IgnoreLayerCollision(15, 12,  true);
 
+		ui = GameObject.FindGameObjectWithTag("ui").GetComponent<uiController>();;
 	
+		InvokeRepeating ("updateTimer", 1, 1);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		time -= 1;
+		//time -= 1;
 
+	}
+
+	void updateTimer() {
+		time -= 1;
+		ui.setTime (time);
 	}
 
 	public void marioGrow() {
@@ -92,10 +106,13 @@ public class GM : MonoBehaviour {
 
 	public void addCoin(int value) {
 		addScore (value);
+		coins += value;
+		ui.setCoins (coins);
 	}
 
 	public void addScore(int value) {
 		score += value;
+		ui.setScore (score);
 	}
 
 	public void addLives(){

@@ -7,7 +7,7 @@ public class mushroomCollision : mushroom {
 		Debug.Log("HIT");
 		if (coll.gameObject.tag == "Player"){
 			Debug.Log("HIT2");
-			Destroy (gameObject);
+			Destroy (transform.parent.gameObject);
 			coll.gameObject.SendMessage ("mushroom", value);
 		}
 	}

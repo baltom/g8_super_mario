@@ -35,12 +35,6 @@ public class GoombaScript : MonoBehaviour {
         dir *= -1;
     }
 
-    void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.tag.Equals("Player")) {
-            //player.die;
-        }
-    }
-
     void death(){
             GameObject deadArt = transform.Find("dead").gameObject;
             deadArt.SetActive(true);

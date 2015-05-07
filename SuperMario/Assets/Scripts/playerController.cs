@@ -9,7 +9,6 @@ public class playerController : MonoBehaviour {
 	private bool sprint = false;
 	private bool idle = true;
 	private bool turn = false;
-	private bool flip = false;
 
 	public Transform groundCheckLeft;
 	public Transform groundCheckRight;
@@ -151,7 +150,6 @@ public class playerController : MonoBehaviour {
 
 			//For å forsikre oss om at det ikke spilles av noen snu-animasjon når man hopper.
 			turn = false;
-			flip = false;
 		}
 
 		//Limit movespeed
@@ -160,6 +158,7 @@ public class playerController : MonoBehaviour {
 
 		//HOPP
 		if (jump) {
+			Mario.drag = 0f;
 			Mario.AddForce(new Vector2(Mario.velocity.x, jumpForce));
 			jump = false;
 		}
@@ -168,8 +167,7 @@ public class playerController : MonoBehaviour {
 		if (jumpAccelerate) {
 			Mario.AddForce(new Vector2(0f, jumpAccel));
 			jumpAccel -= 1;
-			if (jumpAccel < 0f || Mario.velocity.y == 0f)
-				jumpAccelerate = false;
+			
 
 		}
 	}

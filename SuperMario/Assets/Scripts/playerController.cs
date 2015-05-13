@@ -61,6 +61,7 @@ public class playerController : MonoBehaviour {
 
 		}
 
+
 	//BUTTON UP JUMP. 
 	//Om bruker slipper hoppeknappen stopper hoppeakselerasjonen
 		if(Input.GetButtonUp ("Jump"))

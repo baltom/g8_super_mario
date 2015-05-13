@@ -43,6 +43,7 @@ public class KoopaScript : MonoBehaviour {
     }
 
 	void death() {
+        soundController.instance.playClip("smb_stomp.wav");
 		GameObject deadArt = transform.Find("Shell").gameObject;
 		deadArt.SetActive(true);
 		deadArt.transform.SetParent(null);

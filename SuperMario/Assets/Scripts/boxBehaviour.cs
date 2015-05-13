@@ -64,9 +64,6 @@ public class boxBehaviour : MonoBehaviour {
 	}
 	
 	public void spawn() {
-			Instantiate (contents, new Vector3 (gameObject.transform.position.x + x, gameObject.transform.position.y + y, 0f), Quaternion.identity);
-	}
-
-
-	
+		GameObject coin = Instantiate (contents, new Vector3 (gameObject.transform.position.x + x, gameObject.transform.position.y + y, 0f), Quaternion.identity) as GameObject;
+	}	
 }

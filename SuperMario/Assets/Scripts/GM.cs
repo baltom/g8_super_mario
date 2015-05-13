@@ -15,7 +15,6 @@ public class GM : MonoBehaviour {
 	private float y;
 
 	private int coins;
-
 	public float spawn = 155;
 
 	public GameObject lifeManager;
@@ -26,10 +25,9 @@ public class GM : MonoBehaviour {
 
 	public static GM instance = null;
 
-	private uiController ui;
-	private AudioSource mainTheme;
+    public AudioClip fasterThemeSound;
 
-	public AudioClip coinSound, growSound, dieSound, gameOverSound, fasterTimeSound;
+	private uiController ui;
 
 	void Awake() {
 		time = 400;
@@ -64,11 +62,15 @@ public class GM : MonoBehaviour {
 		time -= 1;
 		ui.setTime (time);
 		if (time == 100) {
-			soundController.instance.setMainTheme(fasterTimeSound);
+			soundController.instance.setMainTheme(fasterThemeSound);
 		} else if (time <= 0) {
 			timesUp = true;
 			damageState();
+<<<<<<< HEAD
 			CancelInvoke("updateTimer");
+=======
+            time = 0;
+>>>>>>> origin/master
 		}
 	}
 
@@ -77,7 +79,7 @@ public class GM : MonoBehaviour {
 		destroyClone();
 		spawnMario(MarioLarge, x, y + 0.5f);
 		big = true;
-		soundController.instance.playSound (growSound);
+        soundController.instance.playClip("smb_powerup.wav");
 	}
 
 	public void powerDown() {
@@ -115,7 +117,7 @@ public class GM : MonoBehaviour {
 		addScore (value);
 		coins++;
 		ui.setCoins (coins);
-		soundController.instance.playSound (coinSound);
+        soundController.instance.playClip("smb_coin.wav");
 	}
 
 	public void addScore(int value) {
@@ -133,13 +135,13 @@ public class GM : MonoBehaviour {
 		if (deathCheck ()) {
 			Debug.Log("GAME OVER");
 			MarioClone.SendMessage("gameOver");
-			soundController.instance.playSound (gameOverSound);
+			soundController.instance.playClip ("smb_gameover.wav");
 			gameOver ();
 		} else {
 			Debug.Log("LIFE DOWN");
 			lifeManager.SendMessage("subtractLives");
 			Invoke("restart", 3f);
-			soundController.instance.playSound (dieSound);
+			soundController.instance.playClip ("smb_mariodie.wav");
 		}
 	}
 

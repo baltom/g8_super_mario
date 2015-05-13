@@ -161,9 +161,9 @@ public class playerController : MonoBehaviour {
 		//HOPP
 		if (jump) {
 			if (GM.instance.checkBig()) {
-				AudioSource.PlayClipAtPoint(jumpBigSound, Mario.position);
+                soundController.instance.playClip("smb_jump-super.wav");
 			} else {
-				AudioSource.PlayClipAtPoint(jumpSmallSound, Mario.position);
+                soundController.instance.playClip("smb_jump-small.wav");
 			}
 			Mario.drag = 0f;
 			Mario.AddForce(new Vector2(Mario.velocity.x, jumpForce));

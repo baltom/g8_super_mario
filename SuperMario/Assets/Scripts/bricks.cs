@@ -3,6 +3,7 @@ using System.Collections;
 
 public class bricks : boxBehaviour {
 
+<<<<<<< HEAD
 	public AudioClip breakSound;
 	public GameObject break_topRight;
 	public GameObject break_topLeft;
@@ -12,9 +13,14 @@ public class bricks : boxBehaviour {
 
 	new void Hit  () {
 		if (!GM.instance.checkBig ()) {
+=======
+	new void Hit  () {
+		if (!GM.instance.checkBig ()) {
+			soundController.instance.playClip("smb_bump.wav");
+>>>>>>> origin/master
 			animate ();
 		} else {
-			soundController.instance.playSound(breakSound);
+			soundController.instance.playClip("smb_breakblock.wav");
 			Destroy(gameObject);
 
 			GameObject breakTopRight;

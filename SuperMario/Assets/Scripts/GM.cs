@@ -5,6 +5,7 @@ public class GM : MonoBehaviour {
 
 	bool big = false;
 	bool dead = false;
+	bool timesUp = false;
 
 	private int lives = 3;
 	private int time;
@@ -60,12 +61,14 @@ public class GM : MonoBehaviour {
 	}
 
 	void updateTimer() {
-		time -= 10;
+		time -= 1;
 		ui.setTime (time);
 		if (time == 100) {
 			soundController.instance.setMainTheme(fasterTimeSound);
 		} else if (time <= 0) {
+			timesUp = true;
 			damageState();
+			CancelInvoke("updateTimer");
 		}
 	}
 

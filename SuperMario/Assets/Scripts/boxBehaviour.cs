@@ -13,6 +13,8 @@ public class boxBehaviour : MonoBehaviour {
 	public Sprite boxExhausted;
 	public Transform contents;
 
+	public AudioClip bumpSound;
+
 	public Animator anim;
 	public SpriteRenderer sr;
 
@@ -29,6 +31,8 @@ public class boxBehaviour : MonoBehaviour {
 			animate();
 			timedSpawn(0.5f);
 			exhaust();
+		}else{
+			soundController.instance.playSound(bumpSound);
 		}
 	}
 
@@ -46,6 +50,7 @@ public class boxBehaviour : MonoBehaviour {
 	}
 
 	public void animate() {
+		soundController.instance.playSound(bumpSound);
 		anim.SetTrigger ("Hit");
 	}
 

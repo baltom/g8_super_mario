@@ -17,7 +17,7 @@ public class GoombaScript : MonoBehaviour {
         transform.position = Vector2.MoveTowards(transform.position, pos + (dir * 1f), Time.deltaTime * 1f);
         Vector2 rayPos = new Vector2(transform.position.x + (dir.x * 0.51f), transform.position.y - 0.4f);
         RaycastHit2D hit = Physics2D.Raycast(rayPos, dir, 0.01f);
-        if (hit.transform != null && !hit.transform.gameObject.tag.Equals("Player") && !dead) {
+		if (hit.transform != null && !hit.transform.gameObject.tag.Equals("Player") && !dead && !hit.transform.gameObject.tag.Equals("MainCamera")) {
             toggleDirection();
         }
         RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(rayPos.x - (dir.x * 1f), rayPos.y), -dir, 0.01f);

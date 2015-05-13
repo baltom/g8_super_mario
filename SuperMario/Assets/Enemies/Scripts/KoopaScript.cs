@@ -30,13 +30,7 @@ public class KoopaScript : MonoBehaviour {
             dead = true;
         }
         Vector2 rayPosUp = new Vector2(pos.x, pos.y + 1f);
-        RaycastHit2D hitUp = Physics2D.Raycast(rayPos, Vector2.up, 0.01f);
-        if (hitUp.collider != null && hitUp.transform.gameObject.tag.Equals("Player") || Input.GetKey(KeyCode.I)) {
-            GameObject deadArt = transform.Find("Shell").gameObject;
-            deadArt.SetActive(true);
-            deadArt.transform.SetParent(null);
-            GameObject.Destroy(this.gameObject);
-        }
+       
 	}
 
     private void toggleDirection() {
@@ -48,9 +42,10 @@ public class KoopaScript : MonoBehaviour {
         transform.localScale = new Vector3(transform.localScale.x * -1, 1);
     }
 
-    void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.tag.Equals("Player")) {
-            //player.die;
-        }
-    }
+	void death() {
+		GameObject deadArt = transform.Find("Shell").gameObject;
+		deadArt.SetActive(true);
+		deadArt.transform.SetParent(null);
+		GameObject.Destroy(this.gameObject);
+	}
 }

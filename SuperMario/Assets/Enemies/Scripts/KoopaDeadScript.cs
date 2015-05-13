@@ -42,8 +42,9 @@ public class KoopaDeadScript : MonoBehaviour {
             } else {
                 dir = Vector2.right;
             }
+			shot = true;
+			gameObject.tag = "Shell";
         }
-        shot = true;
-        gameObject.tag = "Shell";
+       
     }
 }

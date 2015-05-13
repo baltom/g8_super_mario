@@ -9,7 +9,7 @@ public class playerCollision : MonoBehaviour {
 	private Rigidbody2D Mario;
 	RaycastHit2D boxHit;
 
-	private float enemyBounce = 250f;
+	private float enemyBounce = 300f;
 
 	void Awake() {
 		groundCheckLeft = transform.Find ("groundCheckLeft");

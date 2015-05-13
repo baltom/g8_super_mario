@@ -39,16 +39,18 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>D:/hada0108/Unity5/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>D:/hada0108/Unity5/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Enemies\Scripts\GoombaScript.cs" />
+     <Compile Include="Assets\Enemies\Scripts\GoombaSpawn.cs" />
      <Compile Include="Assets\Enemies\Scripts\KoopaDeadScript.cs" />
      <Compile Include="Assets\Enemies\Scripts\KoopaScript.cs" />
+     <Compile Include="Assets\Enemies\Scripts\KoopaSpawn.cs" />
      <Compile Include="Assets\Scripts\GM.cs" />
      <Compile Include="Assets\Scripts\PowerUPs\coinBox.cs" />
      <Compile Include="Assets\Scripts\PowerUPs\hiddenBox.cs" />
@@ -68,10 +70,10 @@
      <Compile Include="Assets\Scripts\specialBrick.cs" />
      <Compile Include="Assets\Scripts\uiController.cs" />
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>D:/hada0108/Unity5/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
- <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iossupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+ <HintPath>D:/hada0108/Unity5/Editor/Data/PlaybackEngines/iossupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

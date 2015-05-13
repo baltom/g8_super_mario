@@ -14,7 +14,7 @@ public class GM : MonoBehaviour {
 	private float y;
 
 	private int coins;
-//>>>>>>> origin/master
+
 	public float spawn = 155;
 
 	public GameObject lifeManager;
@@ -65,7 +65,7 @@ public class GM : MonoBehaviour {
 		if (time == 100) {
 			soundController.instance.setMainTheme(fasterTimeSound);
 		} else if (time <= 0) {
-			subtractLives();
+			damageState();
 		}
 	}
 

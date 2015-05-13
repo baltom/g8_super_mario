@@ -1,10 +1,17 @@
 fileFormatVersion: 2
 guid: 3abd322a562e28546bbd0ea73bf5b54a
-timeCreated: 1430161333
+timeCreated: 1431519684
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - groundCheckLeft: {instanceID: 0}
+  - groundCheckRight: {instanceID: 0}
+  - topCheck: {instanceID: 0}
+  - Mario: {instanceID: 0}
+  - anim: {instanceID: 0}
+  - jumpSmallSound: {fileID: 8300000, guid: accd59eefe46c32468deaf407bbf9acc, type: 3}
+  - jumpBigSound: {fileID: 8300000, guid: fb44cb85678b6894cbac25dafc06c2a6, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

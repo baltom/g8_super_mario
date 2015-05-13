@@ -28,12 +28,9 @@ public class playerCollision : MonoBehaviour {
 				coll.gameObject.SendMessage("death");
 				Mario.AddForce(new Vector2(Mario.velocity.x, enemyBounce));
 			} else {
-				SendMessage("death");
+				SendMessage("damage");
 			}
 
-		} else if (coll.gameObject.tag == "pit"){
-			GM.instance.subtractLives();
-			SendMessage("death");
 		}
 	}
 

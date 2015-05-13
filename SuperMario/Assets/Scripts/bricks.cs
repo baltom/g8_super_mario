@@ -6,8 +6,10 @@ public class bricks : boxBehaviour {
 	new void Hit  () {
 		if(!GM.instance.checkBig())
 			animate ();
+
 		else {
 			Destroy(gameObject);
+			addScore(value);
 		}
 	}
 

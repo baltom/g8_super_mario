@@ -59,7 +59,9 @@
      <Compile Include="Assets\Scripts\boxBehaviour.cs" />
      <Compile Include="Assets\Scripts\bricks.cs" />
      <Compile Include="Assets\Scripts\cameraMovement.cs" />
+     <Compile Include="Assets\Scripts\lifeManager.cs" />
      <Compile Include="Assets\Scripts\marioLargeStart.cs" />
+     <Compile Include="Assets\Scripts\pitCollision.cs" />
      <Compile Include="Assets\Scripts\playerCollision.cs" />
      <Compile Include="Assets\Scripts\playerController.cs" />
      <Compile Include="Assets\Scripts\playerDeath.cs" />

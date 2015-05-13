@@ -91,7 +91,6 @@ public class playerController : MonoBehaviour {
 			if (h > 0 && !facingRight) {
 				Flip ();
 				
-			
 			//Flippe spilleren om han/hun står mot høyre.
 			} else if (h < 0 && facingRight) {
 				Flip ();
@@ -120,6 +119,9 @@ public class playerController : MonoBehaviour {
 			//Hvis vi er under max-hastigheten
 			if (h * Mario.velocity.x < maxSpeed) {
 				Mario.AddForce (Vector2.right * h * moveForce);
+				idle = false;
+				//Enklere å justere hastighet på springingen når man ikke har noe friksjon når man løper. 
+				Mario.drag = 0f;
 			}
 
 			//Hvis ingen input inntreffer
@@ -134,9 +136,7 @@ public class playerController : MonoBehaviour {
 				idle = true;
 			} else {
 				//Forteller animator at den skal spille av springe-animasjonen.
-				idle = false;
-				//Enklere å justere hastighet på springingen når man ikke har noe friksjon når man løper. 
-				Mario.drag = 0f;
+				
 			}
 		
 		//!GROUNDED

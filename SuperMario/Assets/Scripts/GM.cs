@@ -13,11 +13,11 @@ public class GM : MonoBehaviour {
 	private float x;
 	private float y;
 
-
 	private int coins;
 //>>>>>>> origin/master
 	public float spawn = 155;
 
+	public GameObject lifeManager;
 	public GameObject Mario;
 	public GameObject MarioLarge;
 
@@ -107,7 +107,7 @@ public class GM : MonoBehaviour {
 
 	public void addCoin(int value) {
 		addScore (value);
-		coins += value;
+		coins++;
 		ui.setCoins (coins);
 	}
 
@@ -116,11 +116,11 @@ public class GM : MonoBehaviour {
 		ui.setScore (score);
 	}
 
-	public void addLives(){
-		lives += 1;
+	public void oneUp(){
+		lifeManager.SendMessage("addlives");
 	}
 
-	public void subtractLives() {
+	public void damageState() {
 		Debug.Log(lives);
 		if (deathCheck ()) {
 			Debug.Log("GAME OVER");
@@ -128,7 +128,7 @@ public class GM : MonoBehaviour {
 			gameOver ();
 		} else {
 			Debug.Log("LIFE DOWN");
-			lives -= 1;
+			lifeManager.SendMessage("subtractLives");
 			Invoke("restart", 3f);
 		}
 	}

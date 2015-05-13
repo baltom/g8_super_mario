@@ -5,6 +5,7 @@ public class boxBehaviour : MonoBehaviour {
 
 	public bool hit = false;
 	public bool exhausted = false;
+	public int value;
 
 	private float x;
 	private float y;
@@ -38,6 +39,10 @@ public class boxBehaviour : MonoBehaviour {
 	public void setXY(float x, float y){
 		this.x = x;
 		this.y = y;
+	}
+
+	public void addScore(int value) {
+		GM.instance.addScore(value);
 	}
 
 	public void animate() {

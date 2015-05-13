@@ -5,9 +5,9 @@ public class playerDeath : MonoBehaviour {
 	public GameObject marioDeath;
 	public Animator anim;
 
-	void death(){
+	void damage(){
 		if (!GM.instance.checkBig()){
-			GM.instance.subtractLives();
+			GM.instance.damageState();
 			marioDeath = Instantiate(marioDeath, new Vector3 (transform.position.x, transform.position.y, 0f), Quaternion.identity) as GameObject;
 			Destroy(gameObject);
 		} else {

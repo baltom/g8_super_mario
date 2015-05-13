@@ -18,5 +18,6 @@ public class specialBrick : boxBehaviour {
 				exhaust();
 			}
 		}
+		soundController.instance.playClip("smb_bump.wav");
 	}
 }

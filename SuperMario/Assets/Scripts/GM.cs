@@ -66,11 +66,8 @@ public class GM : MonoBehaviour {
 		} else if (time <= 0) {
 			timesUp = true;
 			damageState();
-<<<<<<< HEAD
 			CancelInvoke("updateTimer");
-=======
             time = 0;
->>>>>>> origin/master
 		}
 	}
 

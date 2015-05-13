@@ -50,7 +50,7 @@ public class boxBehaviour : MonoBehaviour {
 	}
 
 	public void animate() {
-		soundController.instance.playSound(bumpSound);
+		soundController.instance.playClip("smb_bump.wav");
 		anim.SetTrigger ("Hit");
 	}
 

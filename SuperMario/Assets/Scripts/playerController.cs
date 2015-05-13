@@ -30,6 +30,8 @@ public class playerController : MonoBehaviour {
 
 	public Animator anim;
 
+	public AudioClip jumpSmallSound, jumpBigSound;
+
 
 	void Awake () {
 	//Finner bakkesjekkeren. Empty gameObject.
@@ -158,6 +160,11 @@ public class playerController : MonoBehaviour {
 
 		//HOPP
 		if (jump) {
+			if (GM.instance.checkBig()) {
+				AudioSource.PlayClipAtPoint(jumpBigSound, Mario.position);
+			} else {
+				AudioSource.PlayClipAtPoint(jumpSmallSound, Mario.position);
+			}
 			Mario.drag = 0f;
 			Mario.AddForce(new Vector2(Mario.velocity.x, jumpForce));
 			jump = false;

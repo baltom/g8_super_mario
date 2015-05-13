@@ -44,6 +44,7 @@ public class uiController : MonoBehaviour {
 	}
 	
 	public void setCoins(int coins) {
+		Debug.Log ("coins!");
 		setCoinText(coins + "");
 	}
 	

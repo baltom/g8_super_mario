@@ -26,6 +26,9 @@ public class GM : MonoBehaviour {
 	public static GM instance = null;
 
 	private uiController ui;
+	private AudioSource mainTheme;
+
+	public AudioClip coinSound, growSound, dieSound, gameOverSound, fasterTimeSound;
 
 	void Awake() {
 		time = 400;
@@ -51,20 +54,19 @@ public class GM : MonoBehaviour {
 		//Spiller og powerups. Bruker trigger. Hindrer at powerups bremser opp spillerobjektet.
 		Physics2D.IgnoreLayerCollision(15, 12,  true);
 
-		ui = GameObject.FindGameObjectWithTag("ui").GetComponent<uiController>();;
+		ui = GameObject.FindGameObjectWithTag("ui").GetComponent<uiController>();
 	
-		InvokeRepeating ("updateTimer", 1, 1);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		//time -= 1;
-
+		InvokeRepeating ("updateTimer", 0, 0.5f);
 	}
 
 	void updateTimer() {
-		time -= 1;
+		time -= 10;
 		ui.setTime (time);
+		if (time == 100) {
+			soundController.instance.setMainTheme(fasterTimeSound);
+		} else if (time <= 0) {
+			subtractLives();
+		}
 	}
 
 	public void marioGrow() {
@@ -72,6 +74,7 @@ public class GM : MonoBehaviour {
 		destroyClone();
 		spawnMario(MarioLarge, x, y + 0.5f);
 		big = true;
+		soundController.instance.playSound (growSound);
 	}
 
 	public void powerDown() {
@@ -109,6 +112,7 @@ public class GM : MonoBehaviour {
 		addScore (value);
 		coins++;
 		ui.setCoins (coins);
+		soundController.instance.playSound (coinSound);
 	}
 
 	public void addScore(int value) {
@@ -122,14 +126,17 @@ public class GM : MonoBehaviour {
 
 	public void damageState() {
 		Debug.Log(lives);
+		soundController.instance.stopMainTheme();
 		if (deathCheck ()) {
 			Debug.Log("GAME OVER");
 			MarioClone.SendMessage("gameOver");
+			soundController.instance.playSound (gameOverSound);
 			gameOver ();
 		} else {
 			Debug.Log("LIFE DOWN");
 			lifeManager.SendMessage("subtractLives");
 			Invoke("restart", 3f);
+			soundController.instance.playSound (dieSound);
 		}
 	}
 

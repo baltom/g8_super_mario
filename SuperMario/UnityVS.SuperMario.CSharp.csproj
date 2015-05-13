@@ -59,6 +59,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="UnityVS.SuperMario.CSharp.Plugins.csproj">
+      <Project>{14BADAD0-24FC-3F47-5D31-40DE5C2FA495}</Project>
+      <Name>UnityVS.SuperMario.CSharp.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\Enemies\Scripts\GoombaScript.cs" />
     <Compile Include="Assets\Enemies\Scripts\GoombaSpawn.cs" />
     <Compile Include="Assets\Enemies\Scripts\KoopaDeadScript.cs" />
@@ -87,6 +93,9 @@
     <Compile Include="Assets\Scripts\soundController.cs" />
     <Compile Include="Assets\Scripts\specialBrick.cs" />
     <Compile Include="Assets\Scripts\uiController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>

@@ -3,14 +3,12 @@ using System.Collections;
 
 public class bricks : boxBehaviour {
 
-	public AudioClip breakSound, bumpSound;
-
 	new void Hit  () {
 		if (!GM.instance.checkBig ()) {
-			soundController.instance.playSound(bumpSound);
+			soundController.instance.playClip("smb_bump.wav");
 			animate ();
 		} else {
-			soundController.instance.playSound(breakSound);
+			soundController.instance.playClip("smb_breakblock.wav");
 			Destroy(gameObject);
 			addScore(value);
 		}

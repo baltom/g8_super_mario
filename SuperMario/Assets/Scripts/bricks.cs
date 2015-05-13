@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class bricks : boxBehaviour {
+	bool bump = false;
 
 	public AudioClip breakSound;
 	public GameObject break_topRight;
@@ -10,6 +11,8 @@ public class bricks : boxBehaviour {
 	public GameObject break_bottomLeft;
 
 	new void Hit  () {
+		bump = true;
+		Debug.Log (bump);
 		if (!GM.instance.checkBig ()) {
 			soundController.instance.playClip("smb_bump.wav");
 			animate ();
@@ -37,4 +40,10 @@ public class bricks : boxBehaviour {
 		}
 	}
 
+	void onCollision2DStay(Collider2D coll) {
+		if (bump && coll.gameObject.tag == "Enemy") {
+			coll.SendMessage ("deathByBump");
+			Debug.Log ("Hit");
+		}
+	}
 }

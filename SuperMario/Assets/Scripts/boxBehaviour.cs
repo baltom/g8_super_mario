@@ -12,7 +12,7 @@ public class boxBehaviour : MonoBehaviour {
 	public Sprite boxExhausted;
 	public Transform contents;
 
-	private Animator anim;
+	public Animator anim;
 	public SpriteRenderer sr;
 
 	private GameObject lifeShroom;
@@ -48,7 +48,7 @@ public class boxBehaviour : MonoBehaviour {
 		Destroy (gameObject);
 	}
 
-	public void exhaust() {
+	public virtual void exhaust() {
 		sr.sprite = boxExhausted;
 		exhausted = true;
 	}

@@ -35,11 +35,24 @@ public class playerCollision : MonoBehaviour {
 	}
 
     void OnTriggerEnter2D(Collider2D coll)  {
-        if (coll.ToString().Substring(0, 4).Equals("door"))
+		if (coll.gameObject.tag == "finish")
         {
-            Debug.Log("Game done");
+			GameObject flagPole = coll.gameObject;
+			GM.instance.addScore (finishScore(flagPole));
             GM.instance.gameWon();
         }
     }
+
+	int finishScore(GameObject flagPole) {
+		int flagScore;
+
+		if (Mario.position.y >= 9)
+			flagScore = 5000;
+		else
+			flagScore = (Mathf.RoundToInt (Mario.position.y) * 250);
+		Debug.Log (flagScore);
+		return flagScore;
+		
+	}
 
 }

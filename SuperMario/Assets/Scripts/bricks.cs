@@ -11,8 +11,6 @@ public class bricks : boxBehaviour {
 	public GameObject break_bottomLeft;
 
 	new void Hit  () {
-		bump = true;
-		Debug.Log (bump);
 		if (!GM.instance.checkBig ()) {
 			soundController.instance.playClip("smb_bump.wav");
 			animate ();

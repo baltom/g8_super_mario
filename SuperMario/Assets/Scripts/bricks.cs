@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class bricks : boxBehaviour {
-	bool bump = false;
+	bool enemyOnTop = false;
 
 	public AudioClip breakSound;
 	public GameObject break_topRight;
@@ -40,10 +40,11 @@ public class bricks : boxBehaviour {
 		}
 	}
 
-	void onCollision2DStay(Collider2D coll) {
-		if (bump && coll.gameObject.tag == "Enemy") {
-			coll.SendMessage ("deathByBump");
-			Debug.Log ("Hit");
-		}
+	void onCollision2DEnter(Collider2D coll) {
+		Debug.Log (coll.gameObject.tag);
+		if (coll.gameObject.tag == "Enemy")
+			enemyOnTop = true;
 	}
+
+
 }

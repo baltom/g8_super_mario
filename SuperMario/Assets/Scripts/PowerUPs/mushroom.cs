@@ -12,7 +12,6 @@ public class mushroom : MonoBehaviour {
 	public int value;
 
 	void Awake() {
-		speed = 1.5f;
 		dir = 1f;
 		sideCheck = transform.Find ("sideCheck");
 		Invoke ("move", 1f);
@@ -20,7 +19,7 @@ public class mushroom : MonoBehaviour {
 	}
 
 	void Update (){
-		speed = 2f;
+		speed = 1f;
 		speed = speed * Time.deltaTime;
 		if (active){
 			transform.position = new Vector2(transform.position.x + speed * dir, transform.position.y);
@@ -36,6 +35,8 @@ public class mushroom : MonoBehaviour {
 	}
 
 	public void move() {
+		GetComponent<BoxCollider2D> ().enabled = true;
+		GetComponent<Rigidbody2D> ().isKinematic = false;
 		active = true;
 	}
 

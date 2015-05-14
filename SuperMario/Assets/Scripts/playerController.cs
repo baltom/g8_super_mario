@@ -22,7 +22,7 @@ public class playerController : MonoBehaviour {
 	public float maxSpeed = 7f;
 	public float minSprint = 7f;
 	public float maxSprint = 10f;
-	public float jumpForce = 100f;	
+	public float jumpForce;	
 	public float adjuster = 0.5f;
 	public float temp;
 	

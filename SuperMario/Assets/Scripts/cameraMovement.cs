@@ -13,6 +13,7 @@ public class cameraMovement : MonoBehaviour {
 	}
 
 	void Update() {
+		Debug.Log (target);
 		if (target == null) {
 			findPlayer();
 		}

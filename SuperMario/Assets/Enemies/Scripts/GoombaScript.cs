@@ -5,7 +5,7 @@ public class GoombaScript : MonoBehaviour {
 
     Vector2 dir;
     bool dead = false;
-
+    
 	// Use this for initialization
 	void Start () {
         dir = -Vector2.right;
@@ -36,6 +36,7 @@ public class GoombaScript : MonoBehaviour {
     }
 
     void death(){
+        soundController.instance.playClip("smb_stomp.wav");
             GameObject deadArt = transform.Find("dead").gameObject;
             deadArt.SetActive(true);
             deadArt.transform.SetParent(null);

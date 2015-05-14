@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class lifeManager : MonoBehaviour {
-	private int lives = 3;
+	public int lives = 3;
 	// Use this for initialization
 	void Awake() {
 		Object.DontDestroyOnLoad(gameObject);

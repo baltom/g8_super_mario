@@ -8,17 +8,17 @@ public class soundController : MonoBehaviour {
 
 	public static soundController instance = null;
 
-    private string soundDir = "./Sounds";
-    private List<AudioClip> soundClips;
-    private FileInfo[] soundFiles;
-    private List<string> validExtensions = new List<string> { ".wav" };
+    private string soundDir = "./Sounds"; //Dir til lyd filer når spillet er en exe
+    private List<AudioClip> soundClips; // Inneholder alle lydklipp
+    private FileInfo[] soundFiles; // Midlertidig array
+    private List<string> validExtensions = new List<string> { ".wav" }; //Foreløpig bare 1 godkjent fil ext.
 
-	private AudioSource mainTheme;
+	private AudioSource mainTheme; //Hente inn kamera siden den har hoved musikken
 	public AudioClip bumpSound;
 
     void Start()
     {
-        if (Application.isEditor) soundDir = "Assets/Sounds";
+        if (Application.isEditor) soundDir = "Assets/Sounds"; // bytte lyd dir når man bruker unity editor
         soundClips = new List<AudioClip>();
         loadSoundFiles();
     }
@@ -61,20 +61,29 @@ public class soundController : MonoBehaviour {
         return validExtensions.Contains(Path.GetExtension(filename));
     }
 
-	public void playSound(AudioClip sound) {
-		AudioSource.PlayClipAtPoint(sound, new Vector3(GM.instance.getX(), GM.instance.getY (), 0));
+    public void playSound(AudioClip sound, Vector3 vector, float volume) {
+        AudioSource.PlayClipAtPoint(sound, vector, volume);
+    }
+
+	public void playSound(AudioClip sound, Vector3 vector) {
+        playSound(sound, vector, 1f);
 	}
 
-    public void playClip(string name)
+    public void playClipAt(string name, Vector3 vector, float volume = 1f)
     {
         foreach (AudioClip c in soundClips)
         {
             if (c.name == name)
             {
-                playSound(c);
+                playSound(c, vector, volume);
                 break;
             }
         }
+    }
+
+    public void playClip(string name)
+    {
+        playClipAt(name, new Vector3(GM.instance.getX(), GM.instance.getY(), 0));
     }
 
 	public void setMainTheme(AudioClip sound) {

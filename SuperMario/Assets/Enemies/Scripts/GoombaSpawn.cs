@@ -3,11 +3,11 @@ using System.Collections;
 
 public class GoombaSpawn : MonoBehaviour {
 
-    private Object Goomba;
+    public Object Goomba;
 
 	// Use this for initialization
 	void Start () {
-        Goomba = UnityEditor.AssetDatabase.LoadMainAssetAtPath("Assets/Enemies/Goomba.prefab");
+        //Goomba = UnityEditor.AssetDatabase.LoadMainAssetAtPath("Assets/Enemies/Goomba.prefab");
 	}
 	
 	// Update is called once per frame

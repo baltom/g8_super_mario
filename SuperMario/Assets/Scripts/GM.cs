@@ -152,8 +152,32 @@ public class GM : MonoBehaviour {
 
 	public void restart() {
 		Debug.Log("RESTART");
-		Application.LoadLevel(Application.loadedLevel);
+		Application.LoadLevel(1);
 	}
+
+    public void gameWon()
+    {
+        destroyClone();
+        soundController.instance.stopMainTheme();
+        soundController.instance.playClipAt("smb_stage_clear.wav", new Vector3(204, 1, 0));
+        InvokeRepeating("finalScoreUpdate", 0f, .05f);
+    }
+
+    public void finalScoreUpdate()
+    {
+        if (time > 0) { 
+            time--;
+            ui.setTime(time);
+            addScore(50);
+           soundController.instance.playClipAt("smb_coin.wav", new Vector3(204, 1, 0), 0.5f);
+        } else {
+            time = 0;
+            ui.setTime(0);
+            CancelInvoke();
+
+            restart();
+        }
+    }
 
 	public void gameOver() {
 	

@@ -3,11 +3,11 @@ using System.Collections;
 
 public class KoopaSpawn : MonoBehaviour {
 
-    private Object Koompa;
+    public Object Koompa;
 
     // Use this for initialization
     void Start() {
-        Koompa = UnityEditor.AssetDatabase.LoadMainAssetAtPath("Assets/Enemies/KoopaTroopa.prefab");
+        //Koompa = UnityEditor.AssetDatabase.LoadMainAssetAtPath("Assets/Enemies/KoopaTroopa.prefab");
     }
 
     // Update is called once per frame

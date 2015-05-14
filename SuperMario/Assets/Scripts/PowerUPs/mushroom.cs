@@ -10,6 +10,7 @@ public class mushroom : MonoBehaviour {
 	private float speed;
 	private float dir;
 	public int value;
+	public BoxCollider2D childCollider;
 
 	void Awake() {
 		dir = 1f;
@@ -19,7 +20,7 @@ public class mushroom : MonoBehaviour {
 	}
 
 	void Update (){
-		speed = 1f;
+		speed = 2f;
 		speed = speed * Time.deltaTime;
 		if (active){
 			transform.position = new Vector2(transform.position.x + speed * dir, transform.position.y);
@@ -35,8 +36,9 @@ public class mushroom : MonoBehaviour {
 	}
 
 	public void move() {
-		GetComponent<BoxCollider2D> ().enabled = true;
-		GetComponent<Rigidbody2D> ().isKinematic = false;
+		Debug.Log ("MOVE");
+		GetComponent<Rigidbody2D>().isKinematic = false;
+		childCollider.enabled = true;
 		active = true;
 	}
 

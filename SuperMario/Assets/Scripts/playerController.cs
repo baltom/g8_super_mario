@@ -5,7 +5,7 @@ public class playerController : MonoBehaviour {
 	private bool jump = false;
 	private bool facingRight = true;
 	private bool grounded = true;
-	private bool jumpAccelerate = false;
+	private bool jumping = false;
 	private bool sprint = false;
 	private bool idle = true;
 	private bool turn = false;
@@ -14,15 +14,15 @@ public class playerController : MonoBehaviour {
 	public Transform groundCheckRight;
 	public Transform topCheck;
 
+	public float accelForce;
 	public float counter = 0f;
 	public float h;
-	public float jumpAccel = 20f;
 	public float moveForce = 10f;
 	public float airForce = 5f;
 	public float maxSpeed = 7f;
 	public float minSprint = 7f;
 	public float maxSprint = 10f;
-	public float jumpForce = 400f;	
+	public float jumpForce = 100f;	
 	public float adjuster = 0.5f;
 	public float temp;
 	
@@ -53,19 +53,15 @@ public class playerController : MonoBehaviour {
 	
 	//BUTTON JUMP
 		if (Input.GetButtonDown ("Jump") && grounded) {
+			accelForce = 30f;
 			Mario.drag = 0f;
 			jump = true;
-			//Om bruker fortsetter å holde knappen inne vil Mario hoppe høyere.
-			jumpAccelerate = true;
-			jumpAccel = 27f;
-
+			jumping = true;
 		}
 
-
-	//BUTTON UP JUMP. 
-	//Om bruker slipper hoppeknappen stopper hoppeakselerasjonen
-		if(Input.GetButtonUp ("Jump"))
-			jumpAccelerate = false; 
+		if (Input.GetButton ("Jump") && !grounded && jumping) {
+			jumpAccel ();
+		}
 	
 
 	//Button Sprint
@@ -161,23 +157,20 @@ public class playerController : MonoBehaviour {
 
 		//HOPP
 		if (jump) {
+			float accelForce = 15f;
+			Mario.drag = 0f;
+			Mario.AddForce(new Vector2(Mario.velocity.x, jumpForce));
+
 			if (GM.instance.checkBig()) {
                 soundController.instance.playClip("smb_jump-super.wav");
 			} else {
                 soundController.instance.playClip("smb_jump-small.wav");
 			}
-			Mario.drag = 0f;
-			Mario.AddForce(new Vector2(Mario.velocity.x, jumpForce));
+		
+			jumpAccel ();
 			jump = false;
 		}
-
-		//HOPPAKSELERASJON
-		if (jumpAccelerate) {
-			Mario.AddForce(new Vector2(0f, jumpAccel));
-			jumpAccel -= 1;
-			
-
-		}
+		
 	}
 
 	void Flip ()
@@ -189,6 +182,16 @@ public class playerController : MonoBehaviour {
 		theScale.x *= -1;
 		transform.localScale = theScale;
 
+	}
+
+	void jumpAccel() {
+
+		if (accelForce > 0f) {
+			Mario.AddForce (new Vector2(0f, accelForce));
+			accelForce -= 1;
+
+		}
+	
 	}
 
 

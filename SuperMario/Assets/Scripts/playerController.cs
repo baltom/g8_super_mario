@@ -6,6 +6,7 @@ public class playerController : MonoBehaviour {
 	private bool facingRight = true;
 	private bool grounded = true;
 	private bool jumping = false;
+	private bool jumpAccel;
 	private bool sprint = false;
 	private bool idle = true;
 	private bool turn = false;
@@ -53,15 +54,18 @@ public class playerController : MonoBehaviour {
 	
 	//BUTTON JUMP
 		if (Input.GetButtonDown ("Jump") && grounded) {
-			accelForce = 30f;
+			accelForce = 70f;
 			Mario.drag = 0f;
 			jump = true;
 			jumping = true;
 		}
 
 		if (Input.GetButton ("Jump") && !grounded && jumping) {
-			jumpAccel ();
+			jumpAccel = true;
 		}
+
+		if(Input.GetButtonUp ("Jump"))
+		   jumpAccel = false;
 	
 
 	//Button Sprint
@@ -167,9 +171,18 @@ public class playerController : MonoBehaviour {
                 soundController.instance.playClip("smb_jump-small.wav");
 			}
 		
-			jumpAccel ();
+
 			jump = false;
 		}
+
+		if (jumpAccel) {
+			if (accelForce > 0f) {
+				Mario.AddForce (new Vector2(0f, accelForce));
+				accelForce -= 6;
+				Debug.Log (accelForce);
+			}
+		}
+
 		
 	}
 
@@ -184,15 +197,11 @@ public class playerController : MonoBehaviour {
 
 	}
 
-	void jumpAccel() {
+//void jumpAccel() {
 
-		if (accelForce > 0f) {
-			Mario.AddForce (new Vector2(0f, accelForce));
-			accelForce -= 1;
-
-		}
 	
-	}
+	
+	//}
 
 
 }

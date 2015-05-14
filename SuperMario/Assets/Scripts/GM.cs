@@ -123,7 +123,6 @@ public class GM : MonoBehaviour {
 	}
 
 	public void oneUp(){
-        lives++;
 		lifeManager.SendMessage("addlives");
 	}
 
@@ -137,7 +136,6 @@ public class GM : MonoBehaviour {
 			gameOver ();
 		} else {
 			Debug.Log("LIFE DOWN");
-            lives--;
 			lifeManager.SendMessage("subtractLives");
 			Invoke("restart", 3f);
 			soundController.instance.playClip ("smb_mariodie.wav");
@@ -157,13 +155,32 @@ public class GM : MonoBehaviour {
 		Application.LoadLevel(1);
 	}
 
+    public void gameWon()
+    {
+        destroyClone();
+        soundController.instance.stopMainTheme();
+        soundController.instance.playClipAt("smb_stage_clear.wav", new Vector3(204, 1, 0));
+        InvokeRepeating("finalScoreUpdate", 0f, .05f);
+    }
+
+    public void finalScoreUpdate()
+    {
+        if (time > 0) { 
+            time--;
+            ui.setTime(time);
+            addScore(50);
+           soundController.instance.playClipAt("smb_coin.wav", new Vector3(204, 1, 0), 0.5f);
+        } else {
+            time = 0;
+            ui.setTime(0);
+            CancelInvoke();
+
+            restart();
+        }
+    }
+
 	public void gameOver() {
 	
 	}
-
-    public int getLives()
-    {
-        return lives;
-    }
 
 }

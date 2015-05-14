@@ -32,7 +32,7 @@ public class boxBehaviour : MonoBehaviour {
 			timedSpawn(0.5f);
 			exhaust();
 		}else{
-			soundController.instance.playSound(bumpSound);
+            soundController.instance.playClip("smb_bump.wav");
 		}
 	}
 

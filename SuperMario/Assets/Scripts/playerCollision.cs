@@ -34,4 +34,12 @@ public class playerCollision : MonoBehaviour {
 		}
 	}
 
+    void OnTriggerEnter2D(Collider2D coll)  {
+        if (coll.ToString().Substring(0, 4).Equals("door"))
+        {
+            Debug.Log("Game done");
+            GM.instance.gameWon();
+        }
+    }
+
 }

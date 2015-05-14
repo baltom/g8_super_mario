@@ -8,8 +8,8 @@ public class uiController : MonoBehaviour {
 	private Text timeText;
 	private Text coinText;
 	
-	// Use this for initialization
 	void Start () {
+		//Henter inn alle UI elementene må endres
 		GameObject scTemp = GameObject.FindGameObjectWithTag("ui_score");
 		GameObject tiTemp = GameObject.FindGameObjectWithTag("ui_time");
 		GameObject coTemp = GameObject.FindGameObjectWithTag("ui_coins");

@@ -8,17 +8,17 @@ public class soundController : MonoBehaviour {
 
 	public static soundController instance = null;
 
-    private string soundDir = "./Sounds";
-    private List<AudioClip> soundClips;
-    private FileInfo[] soundFiles;
-    private List<string> validExtensions = new List<string> { ".wav" };
+    private string soundDir = "./Sounds"; //Dir til lyd filer når spillet er en exe
+    private List<AudioClip> soundClips; // Inneholder alle lydklipp
+    private FileInfo[] soundFiles; // Midlertidig array
+    private List<string> validExtensions = new List<string> { ".wav" }; //Foreløpig bare 1 godkjent fil ext.
 
-	private AudioSource mainTheme;
+	private AudioSource mainTheme; //Hente inn kamera siden den har hoved musikken
 	public AudioClip bumpSound;
 
     void Start()
     {
-        if (Application.isEditor) soundDir = "Assets/Sounds";
+        if (Application.isEditor) soundDir = "Assets/Sounds"; // bytte lyd dir når man bruker unity editor
         soundClips = new List<AudioClip>();
         loadSoundFiles();
     }

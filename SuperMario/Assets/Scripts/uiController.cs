@@ -13,11 +13,12 @@ public class uiController : MonoBehaviour {
 		GameObject scTemp = GameObject.FindGameObjectWithTag("ui_score");
 		GameObject tiTemp = GameObject.FindGameObjectWithTag("ui_time");
 		GameObject coTemp = GameObject.FindGameObjectWithTag("ui_coins");
+   
 		scoreText = scTemp.GetComponent<Text>();
 		timeText = tiTemp.GetComponent<Text>();
 		coinText = coTemp.GetComponent<Text> ();
 	}
-	
+
 	//Legger til ekstra 0'er forran en string
 	private string formatString(string input, int length) {
 		string returnString = "";
@@ -44,7 +45,6 @@ public class uiController : MonoBehaviour {
 	}
 	
 	public void setCoins(int coins) {
-		Debug.Log ("coins!");
 		setCoinText(coins + "");
 	}
 	

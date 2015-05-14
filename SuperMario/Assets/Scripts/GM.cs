@@ -123,6 +123,7 @@ public class GM : MonoBehaviour {
 	}
 
 	public void oneUp(){
+        lives++;
 		lifeManager.SendMessage("addlives");
 	}
 
@@ -136,6 +137,7 @@ public class GM : MonoBehaviour {
 			gameOver ();
 		} else {
 			Debug.Log("LIFE DOWN");
+            lives--;
 			lifeManager.SendMessage("subtractLives");
 			Invoke("restart", 3f);
 			soundController.instance.playClip ("smb_mariodie.wav");
@@ -152,11 +154,16 @@ public class GM : MonoBehaviour {
 
 	public void restart() {
 		Debug.Log("RESTART");
-		Application.LoadLevel(Application.loadedLevel);
+		Application.LoadLevel(1);
 	}
 
 	public void gameOver() {
 	
 	}
+
+    public int getLives()
+    {
+        return lives;
+    }
 
 }

@@ -165,7 +165,6 @@ public class GM : MonoBehaviour {
 
     public void gameWon()
     {
-        PlayerPrefs.SetInt("topScore", score);
         destroyClone();
         soundController.instance.stopMainTheme();
         soundController.instance.playClipAt("smb_stage_clear.wav", new Vector3(204, 1, 0));
@@ -183,7 +182,7 @@ public class GM : MonoBehaviour {
             time = 0;
             ui.setTime(0);
             CancelInvoke();
-
+            PlayerPrefs.SetInt("topScore", score);
             Application.LoadLevel(0);
         }
     }

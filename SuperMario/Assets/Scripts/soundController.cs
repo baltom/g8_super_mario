@@ -6,9 +6,11 @@ using System.Linq;
 
 public class soundController : MonoBehaviour {
 
+    // mye av "innlastings" koden hentet fra: http://stackoverflow.com/a/15948047
+
 	public static soundController instance = null;
 
-    private string soundDir = "./Sounds"; //Dir til lyd filer når spillet er en exe
+    private string soundDir = "./"; //Dir til lyd filer når spillet er en exe
     private List<AudioClip> soundClips; // Inneholder alle lydklipp
     private FileInfo[] soundFiles; // Midlertidig array
     private List<string> validExtensions = new List<string> { ".wav" }; //Foreløpig bare 1 godkjent fil ext.

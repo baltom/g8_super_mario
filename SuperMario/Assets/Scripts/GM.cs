@@ -17,7 +17,7 @@ public class GM : MonoBehaviour {
 	private int coins;
 	public float spawn = 155;
 
-	public GameObject lifeManager;
+	//public GameObject lifeManager;
 	public GameObject Mario;
 	public GameObject MarioLarge;
 
@@ -56,7 +56,22 @@ public class GM : MonoBehaviour {
 		ui = GameObject.FindGameObjectWithTag("ui").GetComponent<uiController>();
 	
 		InvokeRepeating ("updateTimer", 0, 0.5f);
+
 	}
+
+    void Start()
+    {
+        if (PlayerPrefs.HasKey("score"))
+        {
+            score = PlayerPrefs.GetInt("score");
+            ui.setScore(score);
+        }
+        if (PlayerPrefs.HasKey("coins"))
+        {
+            coins = PlayerPrefs.GetInt("coins");
+            ui.setCoins(coins);
+        }
+    }
 
 	void updateTimer() {
 		time -= 1;
@@ -115,39 +130,32 @@ public class GM : MonoBehaviour {
 		coins++;
 		ui.setCoins (coins);
         soundController.instance.playClip("smb_coin.wav");
+        PlayerPrefs.SetInt("coins", coins);
 	}
 
 	public void addScore(int value) {
 		score += value;
 		ui.setScore (score);
+        PlayerPrefs.SetInt("score", score);
 	}
 
 	public void oneUp(){
-		lifeManager.SendMessage("addlives");
+		lifeManager.instance.addLives();
 	}
 
 	public void damageState() {
-		Debug.Log(lives);
 		soundController.instance.stopMainTheme();
-		if (deathCheck ()) {
-			Debug.Log("GAME OVER");
-			MarioClone.SendMessage("gameOver");
-			soundController.instance.playClip ("smb_gameover.wav");
-			gameOver ();
-		} else {
-			Debug.Log("LIFE DOWN");
-			lifeManager.SendMessage("subtractLives");
-			Invoke("restart", 3f);
-			soundController.instance.playClip ("smb_mariodie.wav");
-		}
+		Debug.Log("LIFE DOWN");
+		lifeManager.instance.subtractLives();
+        if (deathCheck()) {
+           gameOver();
+        }
+		Invoke("restart", 3f);
+		soundController.instance.playClip ("smb_mariodie.wav");
 	}
 
 	public bool deathCheck() {
-
-		if (lives == 0)
-			dead = true;
-
-		return dead;
+        return lifeManager.instance.getLives() <= 0;
 	}
 
 	public void restart() {
@@ -157,6 +165,7 @@ public class GM : MonoBehaviour {
 
     public void gameWon()
     {
+        PlayerPrefs.SetInt("topScore", score);
         destroyClone();
         soundController.instance.stopMainTheme();
         soundController.instance.playClipAt("smb_stage_clear.wav", new Vector3(204, 1, 0));
@@ -175,12 +184,13 @@ public class GM : MonoBehaviour {
             ui.setTime(0);
             CancelInvoke();
 
-            restart();
+            Application.LoadLevel(0);
         }
     }
 
 	public void gameOver() {
-	
+        MarioClone.SendMessage("gameOver");
+        Application.LoadLevel(3);
 	}
 
 }

@@ -24,9 +24,11 @@ public class lifeManager : MonoBehaviour {
 	}
 
 	public void subtractLives() {
-		lives--;
-        PlayerPrefs.SetInt("lives", lives);
-        PlayerPrefs.Save();
+        if (lives > 0) { 
+		    lives--;
+            PlayerPrefs.SetInt("lives", lives);
+            PlayerPrefs.Save();
+        }
 	}
 
 	public int getLives() {

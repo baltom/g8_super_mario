@@ -11,10 +11,12 @@ public class bricks : boxBehaviour {
 	public GameObject break_bottomLeft;
 
 	new void Hit  () {
+
 		if (!GM.instance.checkBig ()) {
 			soundController.instance.playClip("smb_bump.wav");
 			animate ();
 		} else {
+			gameObject.tag = "bumpBox";
 			soundController.instance.playClip("smb_breakblock.wav");
 			Destroy(gameObject);
 

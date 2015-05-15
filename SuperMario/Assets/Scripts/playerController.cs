@@ -161,7 +161,6 @@ public class playerController : MonoBehaviour {
 
 		//HOPP
 		if (jump) {
-			float accelForce = 15f;
 			Mario.drag = 0f;
 			Mario.AddForce(new Vector2(Mario.velocity.x, jumpForce));
 
@@ -179,7 +178,6 @@ public class playerController : MonoBehaviour {
 			if (accelForce > 0f) {
 				Mario.AddForce (new Vector2(0f, accelForce));
 				accelForce -= 6;
-				Debug.Log (accelForce);
 			}
 		}
 

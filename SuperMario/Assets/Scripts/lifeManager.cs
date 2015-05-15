@@ -14,6 +14,7 @@ public class lifeManager : MonoBehaviour {
             lives = PlayerPrefs.GetInt("lives");
         }
 		Object.DontDestroyOnLoad(gameObject);
+		Debug.Log (lives);
 	}
 
 	public void addLives() {

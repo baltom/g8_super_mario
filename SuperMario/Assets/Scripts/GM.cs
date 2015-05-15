@@ -147,9 +147,9 @@ public class GM : MonoBehaviour {
 		soundController.instance.stopMainTheme();
 		Debug.Log("LIFE DOWN");
 		lifeManager.instance.subtractLives();
-        if (deathCheck()) {
-           gameOver();
-        }
+       	if (deathCheck()) {
+        	gameOver();
+     	}
 		Invoke("restart", 3f);
 		soundController.instance.playClip ("smb_mariodie.wav");
 	}

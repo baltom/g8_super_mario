@@ -50,8 +50,10 @@ public class boxBehaviour : MonoBehaviour {
 	}
 
 	public void animate() {
+		gameObject.tag = "bumpBox";
 		soundController.instance.playClip("smb_bump.wav");
 		anim.SetTrigger ("Hit");
+		Invoke ("revertTag", 1f);
 	}
 
 	public void destroy () {
@@ -66,4 +68,8 @@ public class boxBehaviour : MonoBehaviour {
 	public void spawn() {
 		GameObject coin = Instantiate (contents, new Vector3 (gameObject.transform.position.x + x, gameObject.transform.position.y + y, 0f), Quaternion.identity) as GameObject;
 	}	
+
+	public void revertTag(){
+		gameObject.tag = "Box";
+	}
 }

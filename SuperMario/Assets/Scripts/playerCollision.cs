@@ -9,7 +9,10 @@ public class playerCollision : MonoBehaviour {
 	private Rigidbody2D Mario;
 	RaycastHit2D boxHit;
 
+    public GameObject uiPopup;
+
 	private float enemyBounce = 300f;
+    private int addScore = 100;
 
 	void Awake() {
 		groundCheckLeft = transform.Find ("groundCheckLeft");
@@ -17,6 +20,13 @@ public class playerCollision : MonoBehaviour {
 		topCheck = transform.Find("topCheck");
 		Mario = GetComponent<Rigidbody2D>();
 	}
+
+    void FixedUpdate() {
+        //Reset score når mario treffer bakken igjen
+        if (Mario != null && Mario.GetComponent<playerController>() != null) { 
+            if (Mario.GetComponent<playerController>().isGrounded()) addScore = 100;
+        }
+    }
 
 	void OnCollisionEnter2D(Collision2D coll) {
 		boxHit = Physics2D.Linecast(transform.position, topCheck.position, 1 << LayerMask.NameToLayer("Box"));
@@ -27,6 +37,14 @@ public class playerCollision : MonoBehaviour {
 			if (Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position, 1 << LayerMask.NameToLayer("Enemy"))){
 				coll.gameObject.SendMessage("death");
 				Mario.AddForce(new Vector2(Mario.velocity.x, enemyBounce));
+                GM.instance.addScore(addScore);
+                Camera cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+                Vector2 pos = cam.WorldToViewportPoint(coll.gameObject.transform.position);
+                pos = new Vector2(pos.x + 0.01f, pos.y+0.02f);
+                uiController.instance.setPopup(addScore, pos);
+                
+                addScore += 100;
+
 			} else {
 				SendMessage("damage");
 			}

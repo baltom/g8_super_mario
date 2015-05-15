@@ -9,6 +9,10 @@ public class uiController : MonoBehaviour {
 	private Text coinText;
     private Text topScoreText;
     private Text livesText;
+    private Text popupText;
+    private GameObject popup;
+
+    private Vector2 popupPos;
 
     public static uiController instance;
 
@@ -23,6 +27,7 @@ public class uiController : MonoBehaviour {
         GameObject coTemp = GameObject.FindGameObjectWithTag("ui_coins");
         GameObject toTemp = GameObject.FindGameObjectWithTag("ui_topScore");
         GameObject liTemp = GameObject.FindGameObjectWithTag("ui_lives");
+        GameObject poTemp = GameObject.FindGameObjectWithTag("ui_popup");
 
         scoreText = scTemp.GetComponent<Text>();
         if (tiTemp != null) {
@@ -33,6 +38,11 @@ public class uiController : MonoBehaviour {
         }
         if (liTemp != null) {
             livesText = liTemp.GetComponent<Text>();
+        }
+        if (poTemp != null) {
+            popupText = poTemp.GetComponent<Text>();
+            popup = poTemp;
+            popup.SetActive(false);
         }
         coinText = coTemp.GetComponent<Text>();
     }
@@ -88,5 +98,30 @@ public class uiController : MonoBehaviour {
     public void setLives(int lives)
     {
         setLivesText(lives + "");
+    }
+
+    public void setPopup(int score, Vector2 pos) {
+        popupPos = pos;
+        popupText.text = score + "";
+        RectTransform pop = popup.GetComponent<RectTransform>();
+        pop.anchorMin = pos;
+        pop.anchorMax = pos;
+        //popup.GetComponent<RectTransform>().localPosition = pos;
+        popup.SetActive(true);
+        InvokeRepeating("movePopup", 0f, 0.05f);
+        Invoke("hidePopup", 1f);
+        
+    }
+
+    private void movePopup() {
+        popupPos = new Vector2(popupPos.x, popupPos.y + 0.01f);
+        RectTransform pop = popup.GetComponent<RectTransform>();
+        pop.anchorMin = popupPos;
+        pop.anchorMax = popupPos;
+    }
+
+    private void hidePopup() {
+        CancelInvoke();
+        popup.SetActive(false);
     }
 }

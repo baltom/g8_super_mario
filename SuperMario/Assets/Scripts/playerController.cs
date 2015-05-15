@@ -195,6 +195,10 @@ public class playerController : MonoBehaviour {
 
 	}
 
+    public bool isGrounded() {
+        return grounded;
+    }
+
 //void jumpAccel() {
 
 	

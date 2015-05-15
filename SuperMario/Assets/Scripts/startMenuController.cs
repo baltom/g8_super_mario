@@ -15,18 +15,13 @@ public class startMenuController : MonoBehaviour {
     void Awake()
     {
         selector = GameObject.FindGameObjectWithTag("ui_selector").GetComponent<RectTransform>();
-        topScore = GameObject.FindGameObjectWithTag("ui_topScore").GetComponent<Text>();
-
-        if (PlayerPrefs.HasKey("topScore"))
-        {
-            string score = PlayerPrefs.GetInt("topScore")+"";
-            string output = "";
-            for (int i = 0; i < 6-score.Length; i++) {
-                output += "0";
-            }
-            topScore.text = "TOP- " + output + score;
-        }
         selector.localPosition = new Vector3(-150f, upPosition, 0);
+    }
+
+    void Start() {
+        if (PlayerPrefs.HasKey("topScore")) {
+            uiController.instance.setTopScore(PlayerPrefs.GetInt("topScore"));
+        }
     }
 
 	void Update () {

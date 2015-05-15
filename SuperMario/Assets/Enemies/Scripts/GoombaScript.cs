@@ -32,7 +32,7 @@ public class GoombaScript : MonoBehaviour {
             Component.Destroy(transform.GetComponent<BoxCollider2D>());
             dead = true;
         }
-		Debug.Log (GetComponent<Rigidbody2D> ().velocity.x);
+		//Debug.Log (GetComponent<Rigidbody2D> ().velocity.x);
 	}
 
     private void toggleDirection() {

@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class cameraMovement : MonoBehaviour { 
-	private bool finish = false;
+	public bool finish = false;
 	public GameObject target;
 	public GameObject temp;
 	public float xOffset = 3f;

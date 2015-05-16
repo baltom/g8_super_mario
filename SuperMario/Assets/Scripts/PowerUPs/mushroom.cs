@@ -36,7 +36,6 @@ public class mushroom : MonoBehaviour {
 	}
 
 	public void move() {
-		Debug.Log ("MOVE");
 		GetComponent<Rigidbody2D>().isKinematic = false;
 		childCollider.enabled = true;
 		active = true;

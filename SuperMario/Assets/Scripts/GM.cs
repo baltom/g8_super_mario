@@ -4,10 +4,7 @@ using System.Collections;
 public class GM : MonoBehaviour {
 
 	bool big = false;
-	bool dead = false;
-	bool timesUp = false;
 
-	private int lives = 3;
 	private int time;
 	private int score;
 
@@ -79,7 +76,6 @@ public class GM : MonoBehaviour {
 		if (time == 100) {
 			soundController.instance.setMainTheme(fasterThemeSound);
 		} else if (time <= 0) {
-			timesUp = true;
 			damageState();
 			CancelInvoke("updateTimer");
             time = 0;
@@ -95,9 +91,18 @@ public class GM : MonoBehaviour {
 	}
 
 	public void powerDown() {
+		Debug.Log ("POWER DOWN");
 		big = false;
 		destroyClone();
 		spawnMario(Mario, x, y);
+		MarioClone.SendMessage ("damageTimer");
+		Physics2D.IgnoreLayerCollision(15, 11,  true);
+		Invoke ("damageTimer", 2f);
+	}
+
+	public void damageTimer() {
+		MarioClone.SendMessage ("damageTimer");
+		Physics2D.IgnoreLayerCollision(15, 11,  false);
 	}
 
 	public bool checkBig() {

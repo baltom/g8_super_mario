@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class bricks : boxBehaviour {
-	bool enemyOnTop = false;
 
 	public AudioClip breakSound;
 	public GameObject break_topRight;
@@ -38,12 +37,6 @@ public class bricks : boxBehaviour {
 			breakBottomLeft.GetComponent<Rigidbody2D>().AddForce(new Vector2(-200f, 200f));
 			addScore(value);
 		}
-	}
-
-	void onCollision2DEnter(Collider2D coll) {
-		Debug.Log (coll.gameObject.tag);
-		if (coll.gameObject.tag == "Enemy")
-			enemyOnTop = true;
 	}
 
 

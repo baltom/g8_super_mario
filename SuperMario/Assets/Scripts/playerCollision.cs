@@ -7,6 +7,7 @@ public class playerCollision : MonoBehaviour {
 	private Transform groundCheckRight;
 	private Transform topCheck;
 	private Rigidbody2D Mario;
+	private bool invulnerable;
 	RaycastHit2D boxHit;
 
     public GameObject uiPopup;
@@ -71,6 +72,15 @@ public class playerCollision : MonoBehaviour {
 		Debug.Log (flagScore);
 		return flagScore;
 		
+	}
+
+	public void damageTimer() {
+		invulnerable = !invulnerable;
+		Debug.Log (invulnerable);
+		if (invulnerable)
+			GetComponent<SpriteRenderer>().color = new Color (1, 1, 1, 0.5f);
+		else
+			GetComponent<SpriteRenderer>().color = new Color (1, 1, 1, 1f);
 	}
 
 }

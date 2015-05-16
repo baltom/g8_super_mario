@@ -63,12 +63,6 @@ public class playerController : MonoBehaviour {
 			jumping = true;
 		}
 
-		if (entrance && Input.GetButtonDown ("Down"))
-			gameObject.SendMessage("secretLevel");
-
-		if (exit && Input.GetButtonDown ("Right"))
-			gameObject.SendMessage ("secretLevelExit");
-
 		if (Input.GetButton ("Jump") && !grounded && jumping) {
 			jumpAccel = true;
 		}
@@ -82,6 +76,17 @@ public class playerController : MonoBehaviour {
 			sprint = true;
 		else 
 			sprint = false;	
+
+	//Secret Level
+		if (entrance && Input.GetButtonDown ("Down")) {
+			gameObject.SendMessage ("secretLevel");
+			entrance = false;
+		}
+		
+		if (exit && Input.GetButtonDown ("Right")) {
+			gameObject.SendMessage ("secretLevelExit");
+			exit = false;
+		}
 	}
 	
 	void FixedUpdate() {
@@ -194,12 +199,12 @@ public class playerController : MonoBehaviour {
 	}
 
 	public void secretEntrance(int value){
+
 		if (value == 1) {
 			entrance = !entrance;
-			Debug.Log (entrance);
+
 		} else if (value == 2) {
 			exit = !exit;
-			Debug.Log (exit);
 		}
 
 	}
@@ -207,9 +212,10 @@ public class playerController : MonoBehaviour {
 
 	void Flip ()
 	{
-		// Switch the way the player is labelled as facing.
+		//Forandrer boolen som sier hvilken retning Mario står i
 		facingRight = !facingRight; 
-		// Multiply the player's x local scale by -1.
+
+		//Ganger scale med -1 skifter den visuelle retningen.
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+// GM tar seg av mye av kommunikasjon mellom objektene og instantiering og ødelegging av Mario-objektet.
 public class GM : MonoBehaviour {
 
 	bool big = false;
@@ -14,7 +14,6 @@ public class GM : MonoBehaviour {
 	private int coins;
 	public float spawn = 155;
 
-	//public GameObject lifeManager;
 	public GameObject Mario;
 	public GameObject MarioLarge;
 
@@ -82,73 +81,87 @@ public class GM : MonoBehaviour {
 		}
 	}
 
+	//Sender Mario til den hemmelige verden
 	public void secretLevel() {
-		destroyClone ();
-		if(big)
-			spawnMario (MarioLarge, 145f, -7f);
-		else
-			spawnMario (Mario, 145f, -7f);
+		MarioClone.transform.position = new Vector2 (145f, -7f);
+		MarioClone.SendMessage ("unfreeze");
 		GameObject.FindGameObjectWithTag ("MainCamera").SendMessage ("secretLevel");
 	}
 
+	//Sender Mario ut av den hemmelige verden.
 	public void secretExit() {
-		destroyClone ();
-		if(big)
-			spawnMario (MarioLarge, 162.5f, 1f);
+		MarioClone.SendMessage ("unfreeze");
+		if(checkBig())
+			MarioClone.transform.position = new Vector2 (162.5f, 1.5f);
 		else
-			spawnMario (Mario, 162.5f, 1f);
+			MarioClone.transform.position = new Vector2 (162.5f, 1f);
+
 		MarioClone.gameObject.SendMessage ("pipeExit");
 		GameObject.FindGameObjectWithTag ("MainCamera").SendMessage ("secretLevel");
 	}
 
+	//Når mario plukker opp en sopp
 	public void marioGrow() {
-		Debug.Log("GROW");
 		destroyClone();
+
 		spawnMario(MarioLarge, x, y + 0.5f);
 		big = true;
+
         soundController.instance.playClip("smb_powerup.wav");
 	}
 
+	//Når Mario mister Super
 	public void powerDown() {
-		Debug.Log ("POWER DOWN");
 		big = false;
+
 		destroyClone();
+
 		spawnMario(Mario, x, y);
 		MarioClone.SendMessage ("damageTimer");
+
+		//Dette gjør at Mario ikke kan ta skade 
 		Physics2D.IgnoreLayerCollision(15, 11,  true);
+
+		//Invoke for å slå av uovervinneligheten
 		Invoke ("damageTimer", 2f);
 	}
 
+	//Gjør at Mario kan ta skade igjen etter å ha tatt skade.
 	public void damageTimer() {
 		MarioClone.SendMessage ("damageTimer");
 		Physics2D.IgnoreLayerCollision(15, 11,  false);
 	}
 
+	//For å sjekke om Mario er Super Mario eller ikke.
 	public bool checkBig() {
 		return big;
 	}
 
+	//Ødelegger Mario-objektet
 	public void destroyClone(){
 		x = getX();
 		y = getY();
 		Destroy (MarioClone);
 	}
 
+	//Finner og returnerer Mario-klonen sin posisjon i X-aksen
 	public float getX(){
 		x = MarioClone.transform.position.x;
-
 		return x;
 	}
 
+	//Finner og returnerer Mario-klonen sin posisjon i Y-aksen
 	public float getY(){
 		y = MarioClone.transform.position.y;
 		return y;
 	}
 
+	//Instantierer Mario basert på hvilke inputs man gir. Dette gjør at man kan bruke samme metoden til forskjellig spawning.
 	public void spawnMario(GameObject MarioPrefab, float x, float y) {
 		MarioClone = Instantiate (MarioPrefab, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
 	}
 
+	//Legger til Score og Pengeantall	
 	public void addCoin(int value) {
 		addScore (value);
 		coins++;
@@ -157,23 +170,28 @@ public class GM : MonoBehaviour {
         PlayerPrefs.SetInt("coins", coins);
 	}
 
+	//Legger til Score (value er en public int på hver av objektene som plukkes opp).
 	public void addScore(int value) {
 		score += value;
 		ui.setScore (score);
         PlayerPrefs.SetInt("score", score);
 	}
 
+	//Ekstraliv
 	public void oneUp(){
 		lifeManager.instance.addLives();
 	}
 
+	//Når mario tar skade
 	public void damageState() {
+
 		soundController.instance.stopMainTheme();
-		Debug.Log("LIFE DOWN");
 		lifeManager.instance.subtractLives();
+
        	if (deathCheck()) {
         	gameOver();
      	}
+
 		Invoke("restart", 3f);
 		soundController.instance.playClip ("smb_mariodie.wav");
 	}
@@ -183,7 +201,6 @@ public class GM : MonoBehaviour {
 	}
 
 	public void restart() {
-		Debug.Log("RESTART");
 		Application.LoadLevel(1);
 	}
 

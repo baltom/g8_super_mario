@@ -46,7 +46,6 @@ public class GoombaScript : MonoBehaviour {
             deadArt.transform.SetParent(null);
             GameObject.Destroy(this.gameObject);
             GameObject.Destroy(deadArt, 2);
-			soundController.instance.playClip("smb_stomp.wav");
     }
 
 	void deathByBump(){
@@ -54,7 +53,7 @@ public class GoombaScript : MonoBehaviour {
 		GetComponent<BoxCollider2D> ().enabled = false;
 		transform.Rotate (0f, 0f, 180f);
 		GetComponent<Rigidbody2D> ().AddForce (new Vector2 (75f * Mathf.Sign (dir.x) , 200f));
-		soundController.instance.playClip("smb_stomp.wav");
+		soundController.instance.playClip("smb_kick.wav");
 		dead = true;
 	}
 

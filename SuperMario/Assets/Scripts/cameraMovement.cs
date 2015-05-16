@@ -9,26 +9,27 @@ public class cameraMovement : MonoBehaviour {
 	public GameObject temp;
 	public float xOffset = 3f;
 	public float h;
-
+	
 	void Awake () {
+		//Finner spillerobjektet
 		findPlayer();
 	}
 
 	void Update() {
-		//Debug.Log (target);
+		//Hvis kameraet ikke har noe target skal det finne spilleren på nytt.
+		//Dette er til hendelser der mario-objektet blir ødelagt for å erstattes med Super Mario.
 		if (target == null) {
 			findPlayer();
 		}
+
 		if (!finish && target != null && !secret) {
-			
-			h = Input.GetAxis ("Horizontal");
 			if (target.transform.position.x > transform.position.x - xOffset)
-				transform.position = new Vector3 (target.transform.position.x + xOffset,
-		                                  transform.position.y,
-		                                  transform.position.z);
+				//Finner Mario sin posisjon og er alltid xOffset unna han. Kan ikke gå bakover eller oppover.
+				transform.position = new Vector3 (target.transform.position.x + xOffset, transform.position.y, transform.position.z);
 		}
 
 		if (gameObject.transform.position.x > 196.8f) {
+			//Hvis kameraet er kommet til slutten fryser det.
 			gameObject.transform.position = new Vector3(197f, gameObject.transform.position.y, -5f);
 			finish = true;
 		}
@@ -39,6 +40,7 @@ public class cameraMovement : MonoBehaviour {
 	}
 
 	public void secretLevel() {
+		//Når secretlevel blir aktivert flytter kamera seg til levelen og fryser der til Mario warper ut igjen.
 		if (!secret)
 			transform.position = new Vector3 (152f, -13.5f, transform.position.z);
 		else

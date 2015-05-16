@@ -11,14 +11,17 @@ public class bricks : boxBehaviour {
 
 	new void Hit  () {
 
+		//Sjekker om Mario er Super Mario eller ikke.
 		if (!GM.instance.checkBig ()) {
 			soundController.instance.playClip("smb_bump.wav");
 			animate ();
 		} else {
+		//Dødelig tag for fiender
 			gameObject.tag = "bumpBox";
 			soundController.instance.playClip("smb_breakblock.wav");
 			Destroy(gameObject);
 
+		//Instantierer fire objekter som simulerer en framgentering av den knuste boksen.
 			GameObject breakTopRight;
 			breakTopRight = Instantiate (break_topRight, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0f), Quaternion.identity) as GameObject;
 			breakTopRight.GetComponent<Rigidbody2D>().AddForce (new Vector2(200f, 600f));

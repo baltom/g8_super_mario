@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+//Script for å animere vokseanimasjonen og for å ikke kunne la bruker styre før animasjonen har spilt 3 ganger.
 public class marioLargeStart : MonoBehaviour {
 
 	void Awake() {

@@ -26,9 +26,12 @@ public class boxBehaviour : MonoBehaviour {
 		sr = GetComponent<SpriteRenderer> ();
 	}
 
+	//Hit blir sendt i Send Message fra playerCollision
 	public void Hit () {
 		if (!exhausted) {
+			//Animerer boksen
 			animate();
+			//Spawner innhold
 			timedSpawn(0.5f);
 			exhaust();
 		}else{
@@ -44,12 +47,13 @@ public class boxBehaviour : MonoBehaviour {
 		this.x = x;
 		this.y = y;
 	}
-
+	
 	public void addScore(int value) {
 		GM.instance.addScore(value);
 	}
 
 	public void animate() {
+		//Objektet får bumpbox-tag. Hvis noen fiender kolliderer med denne tagen så dør de.
 		gameObject.tag = "bumpBox";
 		soundController.instance.playClip("smb_bump.wav");
 		anim.SetTrigger ("Hit");
@@ -69,6 +73,7 @@ public class boxBehaviour : MonoBehaviour {
 		GameObject coin = Instantiate (contents, new Vector3 (gameObject.transform.position.x + x, gameObject.transform.position.y + y, 0f), Quaternion.identity) as GameObject;
 	}	
 
+		//Setter tag tilbake til originalen
 	public void revertTag(){
 		gameObject.tag = "Box";
 	}

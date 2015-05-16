@@ -30,15 +30,26 @@ public class playerCollision : MonoBehaviour {
     }
 
 	void OnCollisionEnter2D(Collision2D coll) {
+		//Sjekker om Mario treffer en boks. Bruker Linecast for at man kun skal kunne treffe 1 boks om gangen.
 		boxHit = Physics2D.Linecast(transform.position, topCheck.position, 1 << LayerMask.NameToLayer("Box"));
+
 		if (boxHit) {
+			//Sender bedskjed til boksen om at den har blitt truffet
 			boxHit.transform.SendMessage ("Hit");
 			
 		} else if (coll.gameObject.tag == "Enemy"){
+			//Overlap area under Mario sjekker om fienden er under. Hvis ikke dør Mario.
 			if (Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position, 1 << LayerMask.NameToLayer("Enemy"))){
+				//Sender bedskjed til fiendeobjektet at det er dødt.
 				coll.gameObject.SendMessage("death");
+
+				//Bounce
 				Mario.AddForce(new Vector2(Mario.velocity.x, enemyBounce));
+
+				//Legger til score
                 GM.instance.addScore(addScore);
+
+				//Legger til score labels
                 Camera cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
                 Vector2 pos = cam.WorldToViewportPoint(coll.gameObject.transform.position);
                 pos = new Vector2(pos.x + 0.01f, pos.y+0.02f);
@@ -47,6 +58,7 @@ public class playerCollision : MonoBehaviour {
                 addScore += 100;
 
 			} else {
+				//Mario tar skade
 				SendMessage("damage");
 			}
 
@@ -54,6 +66,8 @@ public class playerCollision : MonoBehaviour {
 	}
 
     void OnTriggerEnter2D(Collider2D coll)  {
+
+		//Mario vinner
 		if (coll.gameObject.tag == "finish")
         {
 			GameObject flagPole = coll.gameObject;
@@ -65,18 +79,21 @@ public class playerCollision : MonoBehaviour {
 	int finishScore(GameObject flagPole) {
 		int flagScore;
 
+		//Hvis Mario treffer på toppen
 		if (Mario.position.y >= 9)
 			flagScore = 5000;
+
+		//Hvis Mario treffer noe annet rundes det av til int og ganges med 250.
 		else
 			flagScore = (Mathf.RoundToInt (Mario.position.y) * 250);
-		Debug.Log (flagScore);
+
 		return flagScore;
 		
 	}
 
 	public void damageTimer() {
+		//Dette scriptet gjør Mario halvgjennomsiktig og uskadelig og tilbake til vanlig igjen.
 		invulnerable = !invulnerable;
-		Debug.Log (invulnerable);
 		if (invulnerable)
 			GetComponent<SpriteRenderer>().color = new Color (1, 1, 1, 0.5f);
 		else

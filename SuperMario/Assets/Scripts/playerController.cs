@@ -10,6 +10,8 @@ public class playerController : MonoBehaviour {
 	private bool sprint = false;
 	private bool idle = true;
 	private bool turn = false;
+	private bool entrance;
+	private bool exit;
 
 	public Transform groundCheckLeft;
 	public Transform groundCheckRight;
@@ -50,7 +52,8 @@ public class playerController : MonoBehaviour {
 	//Sjekker om spilleren står på en bakke. Bakkesjekkeren er plassert under spilleren. To tomme gameobjects under spilleren sjekker om de overlapper gameobjects på lagmasken "ground".
 	//Bruker OverlapArea i stedet for linecast ettersom linecast kun sjekker et punkt og dermed vil returnere false om spilleren står helt ytterst på en kant.
 		grounded = Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position, 1 << LayerMask.NameToLayer("Ground")) || Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position, 1 << LayerMask.NameToLayer("Box"));	
-	
+
+
 	
 	//BUTTON JUMP
 		if (Input.GetButtonDown ("Jump") && grounded) {
@@ -59,6 +62,12 @@ public class playerController : MonoBehaviour {
 			jump = true;
 			jumping = true;
 		}
+
+		if (entrance && Input.GetButtonDown ("Down"))
+			gameObject.SendMessage("secretLevel");
+
+		if (exit && Input.GetButtonDown ("Right"))
+			gameObject.SendMessage ("secretLevelExit");
 
 		if (Input.GetButton ("Jump") && !grounded && jumping) {
 			jumpAccel = true;
@@ -184,6 +193,18 @@ public class playerController : MonoBehaviour {
 		
 	}
 
+	public void secretEntrance(int value){
+		if (value == 1) {
+			entrance = !entrance;
+			Debug.Log (entrance);
+		} else if (value == 2) {
+			exit = !exit;
+			Debug.Log (exit);
+		}
+
+	}
+	
+
 	void Flip ()
 	{
 		// Switch the way the player is labelled as facing.
@@ -199,11 +220,7 @@ public class playerController : MonoBehaviour {
         return grounded;
     }
 
-//void jumpAccel() {
 
-	
-	
-	//}
 
 
 }

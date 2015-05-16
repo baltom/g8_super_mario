@@ -3,6 +3,8 @@ using System.Collections;
 
 public class cameraMovement : MonoBehaviour { 
 	public bool finish = false;
+	public bool secret = false;
+
 	public GameObject target;
 	public GameObject temp;
 	public float xOffset = 3f;
@@ -17,7 +19,7 @@ public class cameraMovement : MonoBehaviour {
 		if (target == null) {
 			findPlayer();
 		}
-		if (!finish && target != null) {
+		if (!finish && target != null && !secret) {
 			
 			h = Input.GetAxis ("Horizontal");
 			if (target.transform.position.x > transform.position.x - xOffset)
@@ -35,4 +37,16 @@ public class cameraMovement : MonoBehaviour {
 	public void findPlayer() {
 		target = GameObject.FindWithTag("Player");
 	}
+
+	public void secretLevel() {
+		if (!secret)
+			transform.position = new Vector3 (152f, -13.5f, transform.position.z);
+		else
+			transform.position = new Vector3 (160f, 5.5f, transform.position.z);
+
+		secret = !secret;
+
+	}
+
+
 }

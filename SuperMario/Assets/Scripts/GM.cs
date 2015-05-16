@@ -82,6 +82,25 @@ public class GM : MonoBehaviour {
 		}
 	}
 
+	public void secretLevel() {
+		destroyClone ();
+		if(big)
+			spawnMario (MarioLarge, 145f, -7f);
+		else
+			spawnMario (Mario, 145f, -7f);
+		GameObject.FindGameObjectWithTag ("MainCamera").SendMessage ("secretLevel");
+	}
+
+	public void secretExit() {
+		destroyClone ();
+		if(big)
+			spawnMario (MarioLarge, 162.5f, 1f);
+		else
+			spawnMario (Mario, 162.5f, 1f);
+		MarioClone.gameObject.SendMessage ("pipeExit");
+		GameObject.FindGameObjectWithTag ("MainCamera").SendMessage ("secretLevel");
+	}
+
 	public void marioGrow() {
 		Debug.Log("GROW");
 		destroyClone();

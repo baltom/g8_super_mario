@@ -14,9 +14,7 @@ public class powerUp : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D coll) {
 		if (coll.gameObject.tag == "Player"){
 			pos = Camera.main.WorldToScreenPoint (transform.position);
-			Rigidbody rb = transform.parent.gameObject.GetComponent<Rigidbody>();
-			rb.AddForce(0,100,0);
-			Destroy (transform.parent.gameObject, 0.7f);
+			Destroy (gameObject);
 			GM.instance.addCoin(value);
 		}
 	}
